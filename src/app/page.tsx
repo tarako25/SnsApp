@@ -8,7 +8,7 @@ const IndexPage = () => {
     <>
     <div className="w-[80%] flex justify-center items-center flex-col xl:w-[1025px]">
       <Header />
-      <div className="flex justify-between w-full ">
+      <div className="flex flex-col items-center justify-between w-full md:flex-row md:items-start">
         <MenuBar />
         <Main />
       </div>
