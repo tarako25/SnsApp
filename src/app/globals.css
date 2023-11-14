@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .normal {
-    background-color: rgb(103, 107, 105);
+    background-color: rgb(113 113 122);
 }
 .borderline {
     border: solid 1px;
