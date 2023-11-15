@@ -1,6 +1,6 @@
 "use client"
 import Header from "@/app/compornents/Header"
-import Main from "@/app/compornents/Main"
+import Select  from '@/app/compornents/Select'
 import MenuBar from "@/app/compornents/MenuBar"
 const IndexPage = () => {
 
@@ -10,7 +10,7 @@ const IndexPage = () => {
       <Header />
       <div className="flex flex-col items-center justify-between w-full md:flex-row md:items-start">
         <MenuBar />
-        <Main />
+        <Select />
       </div>
     </div>
     </>

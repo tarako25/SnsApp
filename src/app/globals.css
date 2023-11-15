@@ -5,6 +5,9 @@
 .normal {
     background-color: rgb(113 113 122);
 }
+.fontc {
+    color: rgb(110, 110, 110);
+}
 .borderline {
     border: solid 1px;
     color: rgb(212, 215, 221);
