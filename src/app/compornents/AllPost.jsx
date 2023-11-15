@@ -4,7 +4,7 @@ import Imgae from 'next/image'
 import React from 'react'
 import sample from '@/imgs/sample2.png'
 
-export default function Main() {
+export default function AllPost() {
   return (
     <>
     {/* 1記事 */}
