@@ -1,9 +1,10 @@
 "use client"
+import { useSession } from "next-auth/react"
 import Header from "@/app/compornents/Header"
 import Select  from '@/app/compornents/Select'
 import MenuBar from "@/app/compornents/MenuBar"
 const IndexPage = () => {
-
+  const { data: session } = useSession()
   return (
     <>
     <div className="w-[100%] flex justify-center items-center flex-col md:w-[80%] xl:w-[1025px]">
