@@ -4,7 +4,7 @@ import SignIn from "@/app/compornents/SignIn"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
 
-function page() {
+function Loginpage() {
     const { data: session } = useSession()
     if(session) {
         redirect("/")
@@ -22,4 +22,4 @@ function page() {
   )
 }
 
-export default page
+export default Loginpage
