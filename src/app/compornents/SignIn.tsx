@@ -10,8 +10,8 @@ export default function page() {
     <>
     <div className='flex justify-center items-center h-screen'>
       <div className='w-[450px] h-[500px] sm:h-[550px]'>
-        <div className='flex justify-center items-center flex-col bg-neutral-200 w-full h-full rounded-xl'>
-          <Image src={Logo} alt="" className='w-[175px] h-[60px] mb-5 sm:w-[215px] sm:h-[75px]'/>
+        <div className='flex justify-center items-center flex-col bg-white sm:bg-neutral-200 w-full h-full rounded-xl'>
+          <Image src={Logo} alt="" className='w-[175px] h-[60px] mb-7 sm:w-[215px] sm:h-[75px]'/>
           <div className='flex justify-center items-start flex-col'>
             <label htmlFor="" className='font-bold text-black mb-1 text-sm'>メールアドレス</label>
             <input type="text" placeholder="email" className='pl-2 rounded mb-3 w-[350px] h-[40px] border-2'/>
