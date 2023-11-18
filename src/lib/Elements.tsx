@@ -32,16 +32,9 @@ export const MenuElements = [
         class:"default"
     },
     {
-        MenuName: "ログアウト",
-        link: "/2",
-        icon:<LogoutIcon />,
-        class:"none"
+        MenuName: "開発検証ページ",
+        link: "/sample",
+        icon:<PersonIcon />,
+        class:"default"
     },
-    {
-        MenuName: "アカウント削除",
-        link: "/2",
-        icon:<PersonRemoveIcon />,
-        class:"none"
-    }
-    
 ]

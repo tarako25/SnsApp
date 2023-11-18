@@ -1,17 +1,19 @@
-"use client"
 import React from 'react'
-import { signIn, signOut, useSession } from "next-auth/react"
-import { redirect } from "next/navigation";
+import SignIn from "@/app/compornents/SignIn"
+import Header from "@/app/compornents/Header"
 
-export default function page() {
-    const { data: session } = useSession()
-    if(session){
-        redirect("./");
-    } else {
-        signIn();
-    }
+function page() {
   return (
     <>
+    <div className="relative flex justify-center items-center w-full">
+      <div className="w-[100%] flex justify-center items-center flex-col md:w-[80%] xl:w-[1025px]">
+        <div className="absolute bg-black w-full bg-opacity-40 top-0">
+        <SignIn />
+      </div>
+      </div>
+    </div>
     </>
   )
 }
+
+export default page
