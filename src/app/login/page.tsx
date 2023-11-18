@@ -1,8 +1,14 @@
+"use client"
 import React from 'react'
 import SignIn from "@/app/compornents/SignIn"
-import Header from "@/app/compornents/Header"
+import { useSession } from "next-auth/react"
+import { redirect } from "next/navigation";
 
 function page() {
+    const { data: session } = useSession()
+    if(session) {
+        redirect("/")
+    }
   return (
     <>
     <div className="relative flex justify-center items-center w-full">

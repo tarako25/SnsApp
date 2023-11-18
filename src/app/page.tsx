@@ -1,12 +1,15 @@
-"use client"
-import { useSession } from "next-auth/react"
 import Header from "@/app/compornents/Header"
 import Select  from '@/app/compornents/Select'
 import MenuBar from "@/app/compornents/MenuBar"
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/AuthOption"
 import { redirect } from "next/navigation";
 
-const IndexPage = () => {
-  const { data: session } = useSession()
+const IndexPage = async() => {
+  const session = await getServerSession(authOptions)
+  if(!session) {
+    redirect("/login")
+  }
   return (
     <>
     <div className="relative flex justify-center items-center">
