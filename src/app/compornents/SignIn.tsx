@@ -10,7 +10,7 @@ export default function page() {
     <>
     <div className='flex justify-center items-center h-screen'>
       <div className='w-full sm:w-[450px] bg-white'>
-        <div className='py-[0px] sm:py-[50px] flex justify-start items-center flex-col bg-white sm:bg-neutral-200 w-full h-full rounded-xl'>
+        <div className='pt-[0px] sm:py-[50px] flex justify-start items-center flex-col bg-white sm:bg-neutral-200 w-full h-full rounded-xl'>
           <Image src={Logo} alt="" className='w-[175px] h-[60px] mb-7 sm:w-[215px] sm:h-[75px]'/>
           <div className='flex justify-center items-start flex-col'>
             <label htmlFor="" className='font-bold text-black mb-1 text-sm'>メールアドレス</label>
