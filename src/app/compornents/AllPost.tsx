@@ -29,8 +29,8 @@ export default function AllPost() {
         </div>
       </div>
     </Link>
-    {/* 1記事 */}
-    {/* 1記事 */}
+    {/* 1記事 事 */}
+    {/* 1記
     <Link href="/">
       <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
         <div className='flex w-[95%] mt-3'>
