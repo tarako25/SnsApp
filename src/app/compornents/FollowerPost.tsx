@@ -4,7 +4,7 @@ import Imgae from 'next/image'
 import React from 'react'
 import sample from '@/imgs/sample2.png'
 
-export default function FollowerPost() {
+export default function FollowerPost(data: any) {
   return (
     <>
     {/* 1記事 */}

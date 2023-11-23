@@ -4,7 +4,7 @@ import AllPost from "@/app/compornents/AllPost"
 import FollowerPost from "@/app/compornents/FollowerPost"
 import InputPost from "@/app/compornents/InputPost"
 
-export default function Select() {
+export default function Select(data: any) {
 
   const [switchbtn, setSwitchbtn] = useState(true);
   const handleChange = () => {
@@ -25,8 +25,8 @@ export default function Select() {
                     フォロワーの投稿
                 </div>
             </div>
-            <InputPost />
-            {switchbtn ? <AllPost /> : <FollowerPost />}
+            <InputPost userId={data.userId} userName={data.userName} />
+            {switchbtn ? <AllPost userId={data.userId} userName={data.userName} /> : <FollowerPost userId={data.userId} userName={data.userName} />}
           </div>
         </div>
     </div>

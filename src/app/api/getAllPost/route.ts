@@ -3,16 +3,11 @@ import prisma from "@/lib/Prisma"
 
 export async function GET(req: NextRequest, res: NextResponse) {
     try {
-        const url = new URL(req.url);
-        const email = url.searchParams.get("email");
-        const user = await prisma.user.findFirst({
-            where: {
-                email: email
-            }
+        const data = await prisma.post.findMany({
         })
   
       return NextResponse.json(
-        { user, message: "Success" },
+        { data, message: "Success" },
         { status: 201 },
       );
     } catch (err) {

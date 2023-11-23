@@ -2,12 +2,29 @@
 import React from 'react'
 import Image from 'next/image'
 import sample from '@/imgs/sample2.png'
-export default function InputPost() {
-  const handleInput = (e: any) => {
+
+export default function InputPost(data: any) {
+  const handleInput = async(e: any) => {
     e.preventDefault()
     const formData = new FormData(e.target);
     const content = formData.get("content");
-    
+    if (content == "") {
+      return;
+    }
+    const postData = {
+      content, userId:data.userId, userName: data.userName
+    }
+    const response = await fetch('api/inputPost', {
+      body: JSON.stringify(postData),
+      headers: {
+        "Content-type": "application/json",
+      },
+      method: "POST",
+    });
+    if (!response.ok) {
+      console.error("HTTPエラー:", response.statusText);
+    }
+    e.target.reset();
   } 
   return (
     <>

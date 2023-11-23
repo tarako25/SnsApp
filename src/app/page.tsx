@@ -4,16 +4,31 @@ import Select  from '@/app/compornents/Select'
 import MenuBar from "@/app/compornents/MenuBar"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
+import { useEffect, useState } from "react"
 
 const IndexPage = () => {
-  const { status } = useSession({
+  const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
       // The user is not authenticated, handle it here.
       redirect("/login")
     },
   })
- 
+  const [userId, setUserId] = useState(null);
+  const [userName, setUsername] = useState(null);
+
+  useEffect(() => {
+    if(session){
+      const email = session.user?.email
+      getUserData(email)
+    }
+  },[session])
+  const getUserData = async(email: any) => {
+    const response = await fetch(`api/getUserData?email=${email}`);
+    const userData = await response.json();
+    setUserId(userData.user.id)
+    setUsername(userData.user.name)
+  }
   return (
     <>
     <div className="relative flex justify-center items-center w-full">
@@ -21,7 +36,7 @@ const IndexPage = () => {
         <Header />
         <div className="flex flex-col items-center justify-between w-full md:flex-row md:items-start">
           <MenuBar />
-          <Select/>
+          <Select userId={userId} userName={userName}/>
         </div>
       </div>
     </div>
