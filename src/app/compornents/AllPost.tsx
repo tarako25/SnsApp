@@ -4,6 +4,7 @@ import Imgae from 'next/image'
 import React from 'react'
 import sample from '@/imgs/sample2.png'
 import { useEffect, useState } from "react"
+import InputPost from "@/app/compornents/InputPost"
 
 export default function AllPost(data: any) {
 
@@ -15,10 +16,10 @@ export default function AllPost(data: any) {
     const response = await fetch(`api/getAllPost`);
     const Post = await response.json();
     setPost(Post.data)
-    console.log(Post.data)
   }
   return (
     <>
+    <InputPost userId={data.userId} userName={data.userName} getAllPost={getAllPost}/>
     {/* 1記事 */}
     {post.map((item: any) => (
       <Link href={item.id}>

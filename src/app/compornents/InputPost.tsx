@@ -25,11 +25,10 @@ export default function InputPost(data: any) {
       console.error("HTTPエラー:", response.statusText);
     }
     e.target.reset();
+    data.getAllPost()
   } 
   return (
     <>
-    <div>
-    <div>
       <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
         <div className='flex w-[95%] mt-3'>
           <Image alt="" src={sample} className='w-[55px]  h-[55px] rounded-full border-2 border-zinc-400'/>
@@ -44,8 +43,6 @@ export default function InputPost(data: any) {
           </form>
         </div>
       </div>
-    </div>
-    </div>
     </>
   )
 }

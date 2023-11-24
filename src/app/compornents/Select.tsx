@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import AllPost from "@/app/compornents/AllPost"
 import FollowerPost from "@/app/compornents/FollowerPost"
-import InputPost from "@/app/compornents/InputPost"
 
 export default function Select(data: any) {
 
@@ -25,7 +24,6 @@ export default function Select(data: any) {
                     フォロワーの投稿
                 </div>
             </div>
-            <InputPost userId={data.userId} userName={data.userName} />
             {switchbtn ? <AllPost userId={data.userId} userName={data.userName} /> : <FollowerPost userId={data.userId} userName={data.userName} />}
           </div>
         </div>
