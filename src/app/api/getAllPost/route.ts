@@ -1,13 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/Prisma"
-
+import { pageItem } from "@/lib/PageItem"
 export async function GET(req: NextRequest, res: NextResponse) {
     try {
+        const url = new URL(req.url);
+        const page = url.searchParams.get("page");
+        const pageStart = (Number(page) - 1) * pageItem;
         const data = await prisma.post.findMany({
+          include: {
+            good: true,
+          },
+          orderBy: {
+            id: "desc",
+          },
+          skip:pageStart,
+          take: pageItem,
         })
-  
+        const count = await prisma.post.count({
+        });
       return NextResponse.json(
-        { data, message: "Success" },
+        { data, count, message: "Success" },
         { status: 201 },
       );
     } catch (err) {

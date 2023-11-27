@@ -1,6 +1,6 @@
 "use client"
 import Header from "@/app/compornents/Header"
-import Select  from '@/app/compornents/Select'
+import PostDetail  from '@/app/compornents/PostDetail'
 import MenuBar from "@/app/compornents/MenuBar"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
@@ -36,7 +36,7 @@ const IndexPage = () => {
         <Header />
         <div className="flex flex-col items-center justify-between w-full md:flex-row md:items-start">
           <MenuBar />
-          <Select userId={userId} userName={userName}/>
+          <PostDetail userId={userId} userName={userName}/>
         </div>
       </div>
     </div>

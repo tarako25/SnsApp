@@ -44,6 +44,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   post          Post[]
+  good          Good[]
 }
 
 model VerificationToken {
@@ -56,10 +57,22 @@ model VerificationToken {
 
 model Post {
   id      String     @id @default(cuid())
+  To      String?
   userId  String
   username String
   image   String?
   content String
   createdAt DateTime
+  goodCount Int @default(0)
+  user    User    @relation(fields: [userId], references: [id])
+  good    Good[]
+}
+
+model Good {
+  id       String     @id @default(cuid())
+  postId String
+  userId  String
+  createdAt DateTime
+  post    Post    @relation(fields: [postId], references: [id])
   user    User    @relation(fields: [userId], references: [id])
 }

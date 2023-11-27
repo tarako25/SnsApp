@@ -6,9 +6,11 @@ import FollowerPost from "@/app/compornents/FollowerPost"
 export default function Select(data: any) {
 
   const [switchbtn, setSwitchbtn] = useState(true);
-  const handleChange = () => {
-    //押すたびに反転
-    setSwitchbtn((boolean) => !boolean)
+  const handleAll = () => {
+    setSwitchbtn(true)
+  }
+  const handleFollow = () => {
+    setSwitchbtn(false)
   }
   return (
     <>
@@ -17,14 +19,14 @@ export default function Select(data: any) {
           <div className='w-[95%]'>
             {/* 投稿切り替えボタン */}
             <div className='w-full mt-3 rounded flex justify-around h-[50px]'>
-                <div onClick={handleChange} className='w-[50%] text-sm md:text-base fontc flex justify-center items-center border-2 rounded cursor-pointer font-bold text-md bg-white border-zinc-200'>
+                <div onClick={handleAll} className='w-[50%] text-sm md:text-base fontc flex justify-center items-center border-2 rounded cursor-pointer font-bold text-md bg-white border-zinc-200'>
                     すべての投稿
                 </div>
-                <div onClick={handleChange} className='w-[50%] text-sm md:text-base fontc flex justify-center items-center border-2 rounded cursor-pointer font-bold text-md bg-white border-zinc-200'>
+                <div onClick={handleFollow} className='w-[50%] text-sm md:text-base fontc flex justify-center items-center border-2 rounded cursor-pointer font-bold text-md bg-white border-zinc-200'>
                     フォロワーの投稿
                 </div>
             </div>
-            {switchbtn ? <AllPost userId={data.userId} userName={data.userName} /> : <FollowerPost userId={data.userId} userName={data.userName} />}
+            {switchbtn ? <AllPost userId={data.userId} userName={data.userName}/> : <FollowerPost userId={data.userId} userName={data.userName} />}
           </div>
         </div>
     </div>

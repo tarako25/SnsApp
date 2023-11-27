@@ -8,7 +8,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         const user = await prisma.user.findFirst({
             where: {
                 email: email
-            }
+            },
         })
   
       return NextResponse.json(

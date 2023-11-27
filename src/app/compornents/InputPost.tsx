@@ -25,7 +25,7 @@ export default function InputPost(data: any) {
       console.error("HTTPエラー:", response.statusText);
     }
     e.target.reset();
-    data.getAllPost()
+    data.getAllPost(data.page)
   } 
   return (
     <>
