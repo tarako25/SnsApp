@@ -5,6 +5,7 @@ export default function ToPost() {
   return (
     <>
     <InputPost />
+    aa
     </>
   )
 }
