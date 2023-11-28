@@ -16,8 +16,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
           skip:pageStart,
           take: pageItem,
         })
-        const count = await prisma.post.count({
-        });
+        const count = await prisma.post.count({});
       return NextResponse.json(
         { data, count, message: "Success" },
         { status: 201 },

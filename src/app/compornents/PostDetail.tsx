@@ -26,7 +26,6 @@ export default function PostDetail(data: any) {
   useEffect(() => {
     const postIdUrl = location.pathname.slice(1);
     const postId = postIdUrl.split("/")[0];
-    console.log(postId)
     getPostDetail(postId)
   },[])
 
@@ -34,7 +33,6 @@ export default function PostDetail(data: any) {
     const response = await fetch(`api/getPostDetail?postId=${postId}`);
     const Post = await response.json();
     setPost(Post.data)
-    console.log(Post.data)
   }
 
   //Good押したときの処理
@@ -115,7 +113,7 @@ export default function PostDetail(data: any) {
                   </div>
               </div>
           </div>
-          <ToPost />
+          <ToPost userId={data.userId} userName={data.userName}/>
         </div>
       </div>
     </div>
