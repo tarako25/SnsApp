@@ -42,6 +42,7 @@ export default function PostDetail(data: any) {
       postId,
       userId:data.userId,
     };
+    console.log(PostData)
     const response = await fetch("api/InputGood",{
       body: JSON.stringify(PostData),
       method: "POST",
