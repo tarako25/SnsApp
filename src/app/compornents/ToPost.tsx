@@ -69,7 +69,7 @@ export default function ToPost(data: any) {
 
   return (
     <>
-    <InputPost />
+    <InputPost userId={data.userId} userName={data.userName} To={postid} page={page} getToPost={getToPost}/>
      {/* 1記事 */}
     {post.map((item: any) => (
       <Link href={item.id} key={item.id}>

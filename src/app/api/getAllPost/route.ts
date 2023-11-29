@@ -7,6 +7,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
         const page = url.searchParams.get("page");
         const pageStart = (Number(page) - 1) * pageItem;
         const data = await prisma.post.findMany({
+          where: {
+            To: null
+          },
           include: {
             good: true,
           },
@@ -16,7 +19,11 @@ export async function GET(req: NextRequest, res: NextResponse) {
           skip:pageStart,
           take: pageItem,
         })
-        const count = await prisma.post.count({});
+        const count = await prisma.post.count({
+          where: {
+            To: null
+          }
+        });
       return NextResponse.json(
         { data, count, message: "Success" },
         { status: 201 },

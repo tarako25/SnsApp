@@ -12,8 +12,9 @@ export default function InputPost(data: any) {
       return;
     }
     const postData = {
-      content, userId:data.userId, userName: data.userName
+      content, userId:data.userId, userName: data.userName, To: data.To
     }
+    console.log(postData)
     const response = await fetch('api/inputPost', {
       body: JSON.stringify(postData),
       headers: {
@@ -25,7 +26,11 @@ export default function InputPost(data: any) {
       console.error("HTTPエラー:", response.statusText);
     }
     e.target.reset();
-    data.getAllPost(data.page)
+    if(data.To == undefined){
+      data.getAllPost(data.page)
+    } else {
+      data.getToPost(data.page, data.To)
+    }
   } 
   return (
     <>

@@ -7,13 +7,15 @@ export async function POST(req: NextRequest, res: NextResponse) {
         const username = data.userName;
         const userid = data.userId;
         const content = data.content;
+        const postid = data.To;
         const now = new Date();
         const user = await prisma.post.create({
             data: {
                 username: String(username),
                 content: content,
                 createdAt: now,
-                userId: userid
+                userId: userid,
+                To: postid
             }
         })
       return NextResponse.json(
