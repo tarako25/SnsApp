@@ -1,9 +1,51 @@
 "use client"
 import React from 'react'
 import Link from 'next/link'
-import { MenuElements } from "@/lib/Elements"
 
-export default function MenuBar() {
+import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
+import LogoutIcon from "@mui/icons-material/Logout";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import HomeIcon from "@mui/icons-material/Home";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import PersonIcon from "@mui/icons-material/Person";
+
+export default function MenuBar(data: any) {
+
+  const MenuElements = [
+    {
+        MenuName: "ホーム",
+        link: "/",
+        icon:<HomeIcon />,
+        class:"default",
+    },
+    {
+        MenuName: "プロフィール",
+        link: `/profile/${data.userId}`,
+        icon:<ManageAccountsIcon />,
+        class:"default",
+    },
+    {
+        MenuName: "Goodした投稿",
+        link: "/good",
+        icon:<FavoriteIcon />,
+        class:"default",
+    },
+    {
+        MenuName: "メッセージ",
+        link: "/directMessage",
+        icon:<MailOutlineIcon />,
+        class:"default",
+        id:"true"
+    },
+    {
+        MenuName: "開発検証ページ",
+        link: "/sample",
+        icon:<PersonIcon />,
+        class:"default",
+    },
+]
+
   return (
     <>
       <div className='w-[100%] md:w-[30%] flex'>

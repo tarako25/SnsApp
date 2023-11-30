@@ -35,7 +35,7 @@ const IndexPage = () => {
       <div className="w-[100%] flex justify-center items-center flex-col sm:w-[70%] md:w-[80%] xl:w-[800px]">
         <Header />
         <div className="flex flex-col items-center justify-between w-full md:flex-row md:items-start">
-          <MenuBar />
+          <MenuBar userId={userId} userName={userName}/>
           <PostDetail userId={userId} userName={userName}/>
         </div>
       </div>

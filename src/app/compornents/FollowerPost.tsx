@@ -22,7 +22,7 @@ export default function AllPost(data: any) {
     <InputPost userId={data.userId} userName={data.userName} getAllPost={getAllPost}/>
     {/* 1記事 */}
     {post.map((item: any) => (
-      <Link href={item.id}>
+      <Link href={item.id} key={item.id}>
       <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
         <div className='flex w-[95%] mt-3'>
           <Imgae src={sample} alt="" className='w-[55px]  h-[55px] rounded-full border-2 border-zinc-400'/>

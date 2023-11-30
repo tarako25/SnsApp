@@ -21,4 +21,12 @@ export const authOptions = {
     pages: {
       signIn: '/auth/signin',
     },
+    callbacks: {
+      session: async (session, user) => {
+        if (user) {
+          session.userId = user.id; // userIdをセッションに追加
+        }
+        return session;
+      },
+    },
    }
