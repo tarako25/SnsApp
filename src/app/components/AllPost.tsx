@@ -1,36 +1,39 @@
 "use client"
-import React, { useState, useEffect } from 'react'
-import Pagination from "@mui/material/Pagination";
-import { pageItem } from "@/lib/PageItem"
-import InputPost from "@/app/compornents/InputPost"
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import sample from '@/imgs/sample2.png'
 import Link from 'next/link'
 import Image from 'next/image'
-export default function ToPost(data: any) {
+import React from 'react'
+import sample from '@/imgs/sample2.png'
+import { useEffect, useState } from "react"
+import InputPost from "@/app/components/InputPost"
+import Pagination from "@mui/material/Pagination";
+import { pageItem } from "@/lib/PageItem"
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import  LoadingPost  from "@/app/components/LoadingPost"
+import ChatIcon from "@mui/icons-material/Chat";
 
-  const [post, setPost] = useState([])
-  const [postid, setPostId] = useState("")
+export default function AllPost(data: any) {
+
+  const [post, setPost] = useState([null])
+
   //Pganegation
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
-    const postIdUrl = location.pathname.slice(1);
-    const postId = postIdUrl.split("/")[0];
-    getToPost(page, postId);
-    setPostId(postId)
+    getAllPost(page)
   },[page])
 
-  const getToPost = async(page: number, postId: any) => {
-    const response = await fetch(`api/getToPost?page=${page}&postId=${postId}`);
+  const getAllPost = async(page: number) => {
+    const response = await fetch(`api/getAllPost?page=${page}`);
     const Post = await response.json();
     setPost(Post.data)
     const count = Math.ceil(Post.count / pageItem);
     setPageCount(count);
   }
-
+  if (post[0] === null) {
+    return <LoadingPost />; // ローディング画面を表示
+  }
   //Good押したときの処理
   const handleGood = async(e: any, postId: any) => {
     e.preventDefault();
@@ -38,7 +41,6 @@ export default function ToPost(data: any) {
       postId,
       userId:data.userId,
     };
-    console.log(PostData)
     const response = await fetch("api/InputGood",{
       body: JSON.stringify(PostData),
       method: "POST",
@@ -46,7 +48,7 @@ export default function ToPost(data: any) {
     if (!response.ok) {
       console.error("HTTPエラー:", response.statusText);
     }
-    getToPost(page, postid)
+    getAllPost(page)
   }
 
   //Goodキャンセルしたときの処理
@@ -64,13 +66,12 @@ export default function ToPost(data: any) {
     if (!response.ok) {
       console.error("HTTPエラー:", response.statusText);
     }
-    getToPost(page, postid)
+    getAllPost(page)
   }
-
   return (
     <>
-    <InputPost userId={data.userId} userName={data.userName} To={postid} page={page} getToPost={getToPost}/>
-     {/* 1記事 */}
+    <InputPost userId={data.userId} userName={data.userName} page={page} getAllPost={getAllPost}/>
+    {/* 1記事 */}
     {post.map((item: any) => (
       <Link href={item.id} key={item.id}>
       <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
@@ -96,10 +97,14 @@ export default function ToPost(data: any) {
                   </button>
                 ) : (
                   <button onClick={(e) => handleGood(e, item.id)}>
-                    <FavoriteBorderIcon className='text-[20px]'/>
+                    <FavoriteBorderIcon className='text-[20px] mr-1'/>
                     {item.goodCount}
                   </button>
                 )}
+              </div>
+              <div className='mr-5'>
+                <ChatIcon className='mr-1'/>
+                {item.postCount}
               </div>
             </div>
           </div>

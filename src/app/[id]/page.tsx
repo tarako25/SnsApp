@@ -1,7 +1,7 @@
 "use client"
-import Header from "@/app/compornents/Header"
-import PostDetail  from '@/app/compornents/PostDetail'
-import MenuBar from "@/app/compornents/MenuBar"
+import Header from "@/app/components/Header"
+import PostDetail  from '@/app/components/PostDetail'
+import MenuBar from "@/app/components/MenuBar"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react"

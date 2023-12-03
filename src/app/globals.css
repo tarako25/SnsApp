@@ -15,3 +15,19 @@
 .fcolor {
     color: rgb(114, 114, 114);
 }
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-1 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid;
+  border-color: white #00000010 #00000010 #00000010;
+  position: relative;
+  animation: spin 0.85s infinite linear;
+}

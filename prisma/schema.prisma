@@ -64,6 +64,7 @@ model Post {
   content String
   createdAt DateTime
   goodCount Int @default(0)
+  postCount Int @default(0)
   user    User    @relation(fields: [userId], references: [id])
   good    Good[]
 }

@@ -2,10 +2,12 @@
 import React from 'react'
 import Image from 'next/image'
 import sample from '@/imgs/sample2.png'
+import toast, { Toaster } from "react-hot-toast";
 
 export default function InputPost(data: any) {
   const handleInput = async(e: any) => {
     e.preventDefault()
+    toast.loading("投稿中..", { id: "1" });
     const formData = new FormData(e.target);
     const content = formData.get("content");
     if (content == "") {
@@ -29,11 +31,14 @@ export default function InputPost(data: any) {
     if(data.To == undefined){
       data.getAllPost(data.page)
     } else {
+      data.getPostDetail(data.To)
       data.getToPost(data.page, data.To)
     }
+    toast.success("投稿しました", { id: "1" });
   } 
   return (
     <>
+    <Toaster />
       <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
         <div className='flex w-[95%] mt-3'>
           <Image alt="" src={sample} className='w-[55px]  h-[55px] rounded-full border-2 border-zinc-400'/>

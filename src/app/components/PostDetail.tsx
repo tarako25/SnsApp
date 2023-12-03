@@ -6,7 +6,9 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import Link from 'next/link';
-import ToPost from "@/app/compornents/ToPost"
+import ToPost from "@/app/components/ToPost"
+import LoadingPostDetail from "@/app/components/LoadingPostDetail"
+import ChatIcon from "@mui/icons-material/Chat";
 
 interface PostType {
   id: string;
@@ -17,6 +19,7 @@ interface PostType {
   content: string;
   createdAt: string;
   goodCount: number;
+  postCount: number;
   good: []
 }
 
@@ -35,6 +38,13 @@ export default function PostDetail(data: any) {
     setPost(Post.data)
   }
 
+  if(post == null){
+    return (
+    <>
+    <LoadingPostDetail />
+    </>
+    )
+  }
   //Good押したときの処理
   const handleGood = async(e: any, postId: any) => {
     e.preventDefault();
@@ -109,12 +119,16 @@ export default function PostDetail(data: any) {
                                     {post?.goodCount}
                                 </button>
                                 )}
-                        </div>
+                              </div>
+                              <div className='mr-5'>
+                                <ChatIcon className='mr-1'/>
+                                {post?.postCount}
+                              </div>
+                            </div>
                       </div>
-                  </div>
               </div>
           </div>
-          <ToPost userId={data.userId} userName={data.userName}/>
+          <ToPost userId={data.userId} userName={data.userName} getPostDetail={getPostDetail}/>
         </div>
       </div>
     </div>

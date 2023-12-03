@@ -18,6 +18,21 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 To: postid
             }
         })
+        const count = await prisma.post.count({
+          where: {
+            To:postid
+          }
+        })
+        if(postid){
+          await prisma.post.update({
+            data: {
+              postCount: count,
+            },
+            where: {
+              id: postid,
+            },
+          });
+        }
       return NextResponse.json(
         { user, message: "Success" },
         { status: 201 },

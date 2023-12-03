@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
-import AllPost from "@/app/compornents/AllPost"
-import FollowerPost from "@/app/compornents/FollowerPost"
+import AllPost from "@/app/components/AllPost"
+import FollowerPost from "@/app/components/FollowerPost"
 
 export default function Select(data: any) {
 

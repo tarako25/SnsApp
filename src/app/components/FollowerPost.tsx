@@ -4,7 +4,7 @@ import Imgae from 'next/image'
 import React from 'react'
 import sample from '@/imgs/sample2.png'
 import { useEffect, useState } from "react"
-import InputPost from "@/app/compornents/InputPost"
+import InputPost from "@/app/components/InputPost"
 
 export default function AllPost(data: any) {
 
