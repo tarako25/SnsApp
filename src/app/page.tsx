@@ -18,7 +18,7 @@ const IndexPage = () => {
       redirect("/login")
     },
   })
-
+console.log(session)
   useEffect(()=>{
     if(session){
       setUserId(session.user ? session.user.id : null)
