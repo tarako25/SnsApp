@@ -6,8 +6,16 @@ import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react"
 
+type User = {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+  id?: string | null;
+};
+
 const IndexPage = () => {
 
+  
   const [userId, setUserId] = useState<string | null | undefined>(null);
   const [userName, setUsername] = useState<string | null | undefined>(null);
 
@@ -18,13 +26,11 @@ const IndexPage = () => {
       redirect("/login")
     },
   })
-console.log(session)
-  useEffect(()=>{
-    if(session){
-      setUserId(session.user ? session.user.id : null)
-     setUsername(session.user ? session.user.name : null)
-    }
-},[session])
+  useEffect(() => {
+    const user: User | null | undefined = session ? session.user : null;
+    setUserId(user ? user.id : null);
+    setUsername(user ? user.name : null);
+  }, [session]);
 
   return (
     <>
