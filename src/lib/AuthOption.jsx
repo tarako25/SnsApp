@@ -24,7 +24,7 @@ export const authOptions = {
     callbacks: {
       session: async (session, user) => {
         if (user) {
-          session.userId = user.id; // userIdをセッションに追加
+          session.user.id = user.id; // userIdをセッションに追加
         }
         return session;
       },
