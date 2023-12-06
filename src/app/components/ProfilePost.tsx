@@ -18,14 +18,13 @@ export default function ProfilePost(data: any) {
   const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
-    getAllPost(page)
+    ProfilePost(page)
   },[page])
 
-  const getAllPost = async(page: number) => {
+  const ProfilePost = async(page: number) => {
     const response = await fetch(`/api/getProfilePost?page=${page}&userId=${data.userId}`);
     const Post = await response.json();
     setPost(Post.data)
-    console.log(Post.data)
     const count = Math.ceil(Post.count / pageItem);
     setPageCount(count);
   }
@@ -46,13 +45,12 @@ export default function ProfilePost(data: any) {
     if (!response.ok) {
       console.error("HTTPエラー:", response.statusText);
     }
-    getAllPost(page)
+    ProfilePost(page)
   }
 
   //Goodキャンセルしたときの処理
   const handleCancelGood = async(e: any, postId: any) => {
     e.preventDefault();
-    console.log(postId)
     const PostData = {
       postId,
       userId:data.userId,
@@ -64,13 +62,13 @@ export default function ProfilePost(data: any) {
     if (!response.ok) {
       console.error("HTTPエラー:", response.statusText);
     }
-    getAllPost(page)
+    ProfilePost(page)
   }
   return (
     <>
      {/* 1記事 */}
      {post.map((item: any) => (
-      <Link href={item.id} key={item.id}>
+      <Link href={`/${item.id}`} key={item.id}>
       <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
         <div className='flex w-[95%] mt-3'>
           <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-2 border-zinc-400'/>

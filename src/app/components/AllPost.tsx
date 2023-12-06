@@ -54,7 +54,6 @@ export default function AllPost(data: any) {
   //Goodキャンセルしたときの処理
   const handleCancelGood = async(e: any, postId: any) => {
     e.preventDefault();
-    console.log(postId)
     const PostData = {
       postId,
       userId:data.userId,

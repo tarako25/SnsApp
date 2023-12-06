@@ -7,7 +7,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
         const page = url.searchParams.get("page");
         const userId = url.searchParams.get("userId");
         const pageStart = (Number(page) - 1) * pageItem;
-        console.log(userId)
         const data = await prisma.post.findMany({
           where: {
             To: null,

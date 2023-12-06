@@ -16,7 +16,6 @@ export default function InputPost(data: any) {
     const postData = {
       content, userId:data.userId, userName: data.userName, To: data.To
     }
-    console.log(postData)
     const response = await fetch('api/inputPost', {
       body: JSON.stringify(postData),
       headers: {

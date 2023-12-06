@@ -52,7 +52,6 @@ export default function PostDetail(data: any) {
       postId,
       userId:data.userId,
     };
-    console.log(PostData)
     const response = await fetch("api/InputGood",{
       body: JSON.stringify(PostData),
       method: "POST",
@@ -66,7 +65,6 @@ export default function PostDetail(data: any) {
   //Goodキャンセルしたときの処理
   const handleCancelGood = async(e: any, postId: any) => {
     e.preventDefault();
-    console.log(postId)
     const PostData = {
       postId,
       userId:data.userId,
