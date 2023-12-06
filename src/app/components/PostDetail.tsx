@@ -91,7 +91,7 @@ export default function PostDetail(data: any) {
           </Link>
           <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
               {/* 記事詳細 */}
-              <div className='flex w-[95%] mt-3'>
+              <Link href={`/profile/${post.userId}`} className='flex w-[95%] mt-3'>
                     <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-2 border-zinc-400'/>
                     <div className='flex justify-center w-full items-center flex-col text-left'>
                         <div className='flex justify-start items-center w-[95%]'>
@@ -124,7 +124,7 @@ export default function PostDetail(data: any) {
                               </div>
                             </div>
                       </div>
-              </div>
+              </Link>
           </div>
           <ToPost userId={data.userId} userName={data.userName} getPostDetail={getPostDetail}/>
         </div>
