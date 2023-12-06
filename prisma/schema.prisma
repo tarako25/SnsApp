@@ -41,10 +41,15 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  introduction  String?
+  followCount   Int @default(0)
+  followerCount Int @default(0)
+  delete_flg Int @default(0)
   accounts      Account[]
   sessions      Session[]
   post          Post[]
   good          Good[]
+  follow        Follow[]
 }
 
 model VerificationToken {
@@ -75,5 +80,15 @@ model Good {
   userId  String
   createdAt DateTime
   post    Post    @relation(fields: [postId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+}
+
+model Follow {
+  id          String     @id @default(cuid())
+  userId  String
+  username  String
+  followId  String
+  followname String
+  createdAt DateTime
   user    User    @relation(fields: [userId], references: [id])
 }
