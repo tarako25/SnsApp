@@ -4,6 +4,7 @@ import Image from 'next/image'
 import LoadingPost  from "@/app/components/LoadingPost"
 import toast, { Toaster } from "react-hot-toast";
 import ProfilePost from "@/app/components/ProfilePost"
+import CloseIcon from '@mui/icons-material/Close';
 
 type ProfileData = {
   name: string;
@@ -14,12 +15,14 @@ type ProfileData = {
 }
 
 export default function Profile(data: any) {
-  
+
+  const [isEditModal, setIsEditModal] = useState(false);
   const [userName, setUserName] = useState<string | undefined>(undefined);
   const [userId, setUserId] = useState<string | undefined>(undefined);
   const [profileData, setProfileData] = useState<ProfileData | null>(null)
   const [checkfollow, setCheckfollow] = useState(null);
   useEffect(() => {
+    document.getElementById("edit")
     if(data.userId){
       const userIdUrl = location.pathname.slice(1);
       const userId = userIdUrl.split("/").pop();
@@ -62,8 +65,36 @@ if (profileData === null) {
     toast.success("フォローを解除しました", { id: "1" });
   }
 
+  const openEdit = () => {
+    setIsEditModal(!isEditModal);
+  }
   return (
     <>
+    <div className={isEditModal ? '' : 'hidden'} id="edit">
+      <div className=' bg-black w-screen h-screen fixed top-0 left-0 bg-opacity-50 z-10 flex justify-center items-center flex-col'>
+        <div className="bg-white w-[450px] h-[550px] rounded">
+          <div className='flex items-center flex-col justify-center h-full'>
+            <div className='w-[85%] flex items-center flex-col py-7'>
+              <div className='flex justify-end w-full px-2'>
+                <CloseIcon onClick={openEdit} className='text-gray-400 text-3xl cursor-pointer'/>               
+              </div>
+              <div className='font-bold text-xl text-gray-500'>
+                プロフィール編集
+              </div>
+              <div className='w-[120px] h-[120px] border-gray-300 rounded-[80%] border mt-5'>
+              </div>
+              <form action="" className='flex items-left justify-center flex-col w-[85%]'>
+                <label className="mt-1" htmlFor="username">ユーザー名</label>
+                <input placeholder="ユーザー名(10文字以内)" type="text" id="username" className='border border-gray-300 w-full h-[40px] rounded px-2'></input>
+                <label className="mt-3" htmlFor="introduction">自己紹介</label>
+                <textarea placeholder="趣味や好きな事をかいて友達に知らせよう!" id="introduction" className='border border-gray-300 w-full h-[100px] max-h-[150px] rounded px-2'></textarea>
+              </form>
+              <button className='border border-gray-300 w-[100px] h-[40px] mt-5 rounded'>保存</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <Toaster />
       <div className='mt-3 text-white'>
       プロフィール
@@ -83,7 +114,7 @@ if (profileData === null) {
                 <div className='flex flex-col'>
                   {/* ログイン中のidとurlのidが等しいとき */}
                   {data.userId === userId ? 
-                    <button className='border-gray-300 border-2 p-2 rounded'>
+                    <button onClick={openEdit} className='border-gray-300 border-2 p-2 rounded'>
                       プロフィールを編集する
                     </button>
                     : 
