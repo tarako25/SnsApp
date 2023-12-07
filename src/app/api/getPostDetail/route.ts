@@ -14,7 +14,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
                     good: true,
                 },
             })
-      
           return NextResponse.json(
             { data, message: "Success" },
             { status: 201 },
