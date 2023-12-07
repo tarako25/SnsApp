@@ -27,7 +27,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
                   To: postid
                 }
               });
-
           return NextResponse.json(
             { data,count, message: "Success" },
             { status: 201 },
