@@ -28,7 +28,7 @@ export default function InputPost(data: any) {
     }
     e.target.reset();
     if(data.To == undefined){
-      data.getAllPost(data.page)
+      data.getPost(data.page)
     } else {
       data.getPostDetail(data.To)
       data.getToPost(data.page, data.To)

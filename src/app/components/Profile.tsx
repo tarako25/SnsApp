@@ -111,7 +111,8 @@ if (profileData === null) {
               </div>
             </div>
           </div>
-          <ProfilePost userId={data.userId} userName={data.userName}/>
+          <div className='border border-gray mt-3'></div>
+          <ProfilePost userId={data.userId} userName={data.userName} profileUserId={profileData?.id}/>
     </>
   )
 }

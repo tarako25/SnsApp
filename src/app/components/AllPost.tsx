@@ -69,7 +69,7 @@ export default function AllPost(data: any) {
   }
   return (
     <>
-    <InputPost userId={data.userId} userName={data.userName} page={page} getAllPost={getAllPost}/>
+    <InputPost userId={data.userId} userName={data.userName} page={page} getPost={getAllPost}/>
     {/* 1記事 */}
     {post.map((item: any) => (
       <Link href={item.id} key={item.id}>
