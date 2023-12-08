@@ -16,6 +16,8 @@ type ProfileData = {
 
 export default function Profile(data: any) {
 
+  const [inputUser, setInputUser] = useState("")
+  const [inputIntroduction, setInputIntroduction] = useState("")
   const [isEditModal, setIsEditModal] = useState(false);
   const [userName, setUserName] = useState<string | undefined>(undefined);
   const [userId, setUserId] = useState<string | undefined>(undefined);
@@ -36,6 +38,8 @@ const getProfileData = async(userId:any) => {
   setProfileData(data.user)
   setUserName(data.user.name)
   setCheckfollow(data.follow)
+  setInputUser(data.user.name)
+  setInputIntroduction(data.user.inputIntroduction)
 }
 if (profileData === null) {
   return <LoadingPost />; // ローディング画面を表示
@@ -66,6 +70,16 @@ const handleEdit = async(e: any) => {
   } else{
     toast.success("プロフィールの保存に失敗しました", { id: "1" });
   }
+}
+//編集画面ユーザー入力
+const handleChangeUsername = (e: any) => {
+  const username = e.target.value
+  setInputUser(username)
+}
+//編集画面紹介入力
+const handleChangeIntroduction = (e: any) => {
+  const introduction = e.target.value
+  setInputIntroduction(introduction)
 }
 //フォロー
   const handleFollow = async(followName: any, followId: any) => {
@@ -112,9 +126,9 @@ const handleEdit = async(e: any) => {
               </div>
               <form onSubmit={handleEdit} className='flex items-left justify-center flex-col w-[85%]'>
                 <label className="mt-1" htmlFor="username">ユーザー名</label>
-                <input placeholder="ユーザー名(10文字以内)" name="username" type="text" id="username" className='border border-gray-300 w-full h-[40px] rounded px-2'></input>
+                <input placeholder="ユーザー名(10文字以内)" onChange={handleChangeUsername} value={inputUser} name="username" type="text" id="username" className='border border-gray-300 w-full h-[40px] rounded px-2'></input>
                 <label className="mt-3" htmlFor="introduction">自己紹介</label>
-                <textarea placeholder="趣味や好きな事をかいて友達に知らせよう!" name="introduction" id="introduction" className='border border-gray-300 w-full h-[100px] max-h-[150px] rounded px-2'></textarea>
+                <textarea placeholder="趣味や好きな事をかいて友達に知らせよう!" onChange={handleChangeIntroduction}  value={inputIntroduction} name="introduction" id="introduction" className='border border-gray-300 w-full h-[100px] max-h-[150px] rounded px-2'></textarea>
                 <div className='w-full justify-center items-center flex'>
                   <button type='submit' className='border border-gray-300 w-[100px] h-[40px] mt-5 rounded'>保存</button>
                 </div>
