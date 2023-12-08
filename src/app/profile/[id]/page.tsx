@@ -31,7 +31,6 @@ const IndexPage = () => {
   }
   return (
     <>
-    {/* プロフィール編集画面 */}
     <div className="relative flex justify-center items-center w-full">
       <div className="w-[100%] flex justify-center items-center flex-col sm:w-[70%] md:w-[80%] xl:w-[800px]">
         <Header />

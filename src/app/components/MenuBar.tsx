@@ -27,7 +27,7 @@ export default function MenuBar(data: any) {
     },
     {
         MenuName: "Goodした投稿",
-        link: "/good",
+        link: `/good/${data.userId}`,
         icon:<FavoriteIcon />,
         class:"default",
     },
