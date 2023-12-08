@@ -34,13 +34,40 @@ const getProfileData = async(userId:any) => {
   const response = await fetch(`/api/getProfileData?userId=${userId}`)
   const data = await response.json();
   setProfileData(data.user)
-  console.log(data.user)
   setUserName(data.user.name)
   setCheckfollow(data.follow)
 }
 if (profileData === null) {
   return <LoadingPost />; // ローディング画面を表示
 } 
+//プロフィール編集
+const handleEdit = async(e: any) => {
+  e.preventDefault()
+  const formData = new FormData(e.target);
+  const username = formData.get("username");
+  const introduction = formData.get("introduction");
+  if (username == "") {
+    return;
+  }
+  const postData = {
+    introduction, username, userId:data.userId
+  }
+  const response = await fetch('/api/editProfile', {
+    body: JSON.stringify(postData),
+    headers: {
+      "Content-type": "application/json",
+    },
+    method: "POST",
+  });
+  if(response.ok){
+    openEdit()
+    getProfileData(userId)
+    toast.success("プロフィールを保存しました", { id: "1" });
+  } else{
+    toast.success("プロフィールの保存に失敗しました", { id: "1" });
+  }
+}
+//フォロー
   const handleFollow = async(followName: any, followId: any) => {
     const postData = {
       userId: data.userId, userName: data.userName, followId: followId, followName: followName
@@ -55,7 +82,7 @@ if (profileData === null) {
     getProfileData(userId)
     toast.success("フォローしました", { id: "1" });
   }
-
+//フォロー解除
   const handleCancelFollow = async (checkfollow: any) => {
     const id = checkfollow?.id;
     await fetch(`/api/InputFollow?Id=${id}&followId=${userId}`, {
@@ -83,13 +110,15 @@ if (profileData === null) {
               </div>
               <div className='w-[120px] h-[120px] border-gray-300 rounded-[80%] border mt-5'>
               </div>
-              <form action="" className='flex items-left justify-center flex-col w-[85%]'>
+              <form onSubmit={handleEdit} className='flex items-left justify-center flex-col w-[85%]'>
                 <label className="mt-1" htmlFor="username">ユーザー名</label>
-                <input placeholder="ユーザー名(10文字以内)" type="text" id="username" className='border border-gray-300 w-full h-[40px] rounded px-2'></input>
+                <input placeholder="ユーザー名(10文字以内)" name="username" type="text" id="username" className='border border-gray-300 w-full h-[40px] rounded px-2'></input>
                 <label className="mt-3" htmlFor="introduction">自己紹介</label>
-                <textarea placeholder="趣味や好きな事をかいて友達に知らせよう!" id="introduction" className='border border-gray-300 w-full h-[100px] max-h-[150px] rounded px-2'></textarea>
+                <textarea placeholder="趣味や好きな事をかいて友達に知らせよう!" name="introduction" id="introduction" className='border border-gray-300 w-full h-[100px] max-h-[150px] rounded px-2'></textarea>
+                <div className='w-full justify-center items-center flex'>
+                  <button type='submit' className='border border-gray-300 w-[100px] h-[40px] mt-5 rounded'>保存</button>
+                </div>
               </form>
-              <button className='border border-gray-300 w-[100px] h-[40px] mt-5 rounded'>保存</button>
             </div>
           </div>
         </div>
@@ -137,7 +166,7 @@ if (profileData === null) {
                   フォロワー {profileData?.followerCount}
                 </div>
               </div>
-              <div className='mt-3'>
+              <div className='my-3'>
               {profileData?.introduction}
               </div>
             </div>
