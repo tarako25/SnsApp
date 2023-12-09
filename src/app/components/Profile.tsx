@@ -5,6 +5,8 @@ import LoadingPost  from "@/app/components/LoadingPost"
 import toast, { Toaster } from "react-hot-toast";
 import ProfilePost from "@/app/components/ProfilePost"
 import CloseIcon from '@mui/icons-material/Close';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import Link from 'next/link';
 
 type ProfileData = {
   name: string;
@@ -154,7 +156,7 @@ const handleChangeIntroduction = (e: any) => {
                     @{profileData?.id}
                   </div>
                 </div>
-                <div className='flex flex-col'>
+                <div className='flex flex-col text-sm'>
                   {/* ログイン中のidとurlのidが等しいとき */}
                   {data.userId === userId ? 
                     <button onClick={openEdit} className='border-gray-300 border-2 p-2 rounded'>
@@ -162,17 +164,31 @@ const handleChangeIntroduction = (e: any) => {
                     </button>
                     : 
                     !checkfollow ? 
-                    <button onClick={() => {handleFollow(userName,userId)}} className='border-gray-300 border-2 p-2 rounded'>
+                    <div className='flex'>
+                      <button onClick={() => {handleFollow(userName,userId)}} className='border-gray-300 border-2 py-2 px-3 rounded'>
                       フォローする
-                    </button>
+                      </button>
+                      <div className='ml-2 border-2 border-gray-300 rounded-full w-[40px] h-[40px] flex justify-center items-center'>
+                      <Link href={`/directMessage/${userId}`}>
+                        <MailOutlineIcon />
+                      </Link>
+                      </div>
+                    </div>
                     :
-                    <button onClick={() => {handleCancelFollow(checkfollow)}} className='border-gray-300 border-2 p-2 rounded'>
+                    <div className='flex items-center'>
+                      <button onClick={() => {handleCancelFollow(checkfollow)}} className='border-gray-300 border-2 py-2 px-3 rounded'>
                       フォローを解除する
-                    </button>
+                      </button>
+                      <div className='ml-2 border-2 border-gray-300 rounded-full w-[40px] h-[40px] flex justify-center items-center'>
+                      <Link href={`/directMessage/${userId}`}>
+                        <MailOutlineIcon />
+                      </Link>
+                      </div>
+                    </div>
                   }
                 </div>
               </div>
-              <div className='mt-3 flex'>
+              <div className='mt-3 flex justify-start items-center'>
                 <div className='mr-2'>
                   フォロー {profileData?.followCount}
                 </div>

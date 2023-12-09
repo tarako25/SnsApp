@@ -7,29 +7,34 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import sample from '@/imgs/sample2.png'
 import Link from 'next/link'
 import Image from 'next/image'
+import  LoadingPost  from "@/app/components/LoadingPost"
 import ChatIcon from "@mui/icons-material/Chat";
 
 export default function GoodPost(data: any) {
 
-  const [post, setPost] = useState([])
-  const [postid, setPostId] = useState("")
+  const [post, setPost] = useState([null])
+  const [userId, setUserId] = useState<string | undefined>(undefined);
   //Pganegation
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
     const postIdUrl = location.pathname.slice(1);
-    const postId = postIdUrl.split("/")[0];
-    getGoodPost(page, postId);
-    setPostId(postId)
+    const userId = postIdUrl.split("/").pop();
+    getGoodPost(page, userId);
+    setUserId(userId)
   },[page])
 
-  const getGoodPost = async(page: number, postId: any) => {
-    const response = await fetch(`/api/getGoodPost?page=${page}&postId=${postId}`);
+  const getGoodPost = async(page: number, userId: any) => {
+    const response = await fetch(`/api/getGoodPost?page=${page}&userId=${userId}`);
     const Post = await response.json();
     setPost(Post.data)
     const count = Math.ceil(Post.count / pageItem);
     setPageCount(count);
+  }
+
+  if (post[0] === null) {
+    return <LoadingPost />; // ローディング画面を表示
   }
 
   //Good押したときの処理
@@ -39,14 +44,14 @@ export default function GoodPost(data: any) {
       postId,
       userId:data.userId,
     };
-    const response = await fetch("api/InputGood",{
+    const response = await fetch("/api/InputGood",{
       body: JSON.stringify(PostData),
       method: "POST",
     });
     if (!response.ok) {
       console.error("HTTPエラー:", response.statusText);
     }
-    getGoodPost(page, postid)
+    getGoodPost(page, userId)
   }
 
   //Goodキャンセルしたときの処理
@@ -56,18 +61,21 @@ export default function GoodPost(data: any) {
       postId,
       userId:data.userId,
     };
-    const response = await fetch("api/InputGood",{
+    const response = await fetch("/api/InputGood",{
       body: JSON.stringify(PostData),
       method: "PUT",
     });
     if (!response.ok) {
       console.error("HTTPエラー:", response.statusText);
     }
-    getGoodPost(page, postid)
+    getGoodPost(page, userId)
   }
 
   return (
     <>
+    <div className='mt-3 text-white'>
+      Goodした投稿
+    </div>
      {/* 1記事 */}
     {post.map((item: any) => (
       <Link href={item.id} key={item.id}>

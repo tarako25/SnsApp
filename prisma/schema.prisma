@@ -50,6 +50,7 @@ model User {
   post          Post[]
   good          Good[]
   follow        Follow[]
+  directMessage DirectMessage[]
 }
 
 model VerificationToken {
@@ -91,4 +92,17 @@ model Follow {
   followname String
   createdAt DateTime
   user    User    @relation(fields: [userId], references: [id])
+}
+
+model DirectMessage {
+  id      String     @id @default(cuid())
+  userId  String
+  targetId String
+  username String
+  targetname String
+  content String
+  createdAt DateTime
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
