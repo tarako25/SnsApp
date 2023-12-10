@@ -26,6 +26,12 @@ export default function MenuBar(data: any) {
         class:"default",
     },
     {
+      MenuName: "フォロー",
+      link: `/follow/${data.userId}`,
+      icon:<PersonIcon />,
+      class:"default",
+  },
+    {
         MenuName: "Goodした投稿",
         link: `/good/${data.userId}`,
         icon:<FavoriteIcon />,
