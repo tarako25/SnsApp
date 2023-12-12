@@ -1,5 +1,7 @@
 "use client"
 import React, { useState } from 'react'
+import  FollowUser  from "@/app/components/FollowUser"
+import  FollowerUser  from "@/app/components/FollowerUser"
 
 export default function SelectFollow(data: any) {
     
@@ -20,7 +22,7 @@ export default function SelectFollow(data: any) {
             フォロワー
         </div>
     </div>
-    {/* {switchbtn ? <AllPost userId={data.userId} userName={data.userName}/> : <FollowerPost userId={data.userId} userName={data.userName} />} */}
+    {switchbtn ? <FollowUser userId={data.userId} userName={data.userName}/> : <FollowerUser userId={data.userId} userName={data.userName} />}
     </>
   )
 }

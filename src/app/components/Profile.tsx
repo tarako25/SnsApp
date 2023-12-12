@@ -111,6 +111,7 @@ const handleChangeIntroduction = (e: any) => {
   const openEdit = () => {
     setIsEditModal(!isEditModal);
   }
+  console.log(checkfollow)
   return (
     <>
     <div className={isEditModal ? '' : 'hidden'} id="edit">

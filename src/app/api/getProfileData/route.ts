@@ -16,8 +16,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
             },
         })
         const follow = await prisma.follow.findFirst({
-            where:{
-                userId:id
+            where:{        
+                userId: id,
+                followId: String(userId)
             }
         })
       return NextResponse.json(
