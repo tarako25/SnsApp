@@ -40,6 +40,10 @@ const getFollower = async(page: number, userId: any) => {
 
   //フォロー
   const handleFollow = async(followName: any, followId: any) => {
+    console.log(data.userId)
+    console.log(data.userName)
+    console.log(followId)
+    console.log(followName)
     const postData = {
       userId: data.userId, userName: data.userName, followId: followId, followName: followName
     }
