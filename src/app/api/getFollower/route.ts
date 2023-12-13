@@ -20,13 +20,18 @@ export async function GET(req: NextRequest, res: NextResponse) {
           skip:pageStart,
           take: pageItem,
     })
+    const follow = await prisma.follow.findFirst({
+      where:{        
+          userId: String(userId)
+      }
+  })
     const count = await prisma.follow.count({
         where:{
             followId: String(userId)
         }
     })
     return NextResponse.json(
-      { message: "Success", follower, count },
+      { message: "Success", follower, count, follow },
       { status: 201 },
     );
   } catch (err) {
