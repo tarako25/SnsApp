@@ -74,8 +74,8 @@ const getFollower = async(page: number, userId: any) => {
             <div className='flex justify-center w-full items-center flex-col text-left'>
               <div className='flex justify-start items-center w-[95%]'>
                 <div className='w-[95%] font-bold mb-1 text-md'>{item.username}</div>
-                { data ?
-                <button onClick={() => {handleFollow(item.followname,userId)}} className='border-gray-300 border-2 px-2 py-1 rounded text-xs'>
+                { !checkfollow ?
+                <button onClick={() => {handleFollow(item.followname,item.followId)}} className='border-gray-300 border-2 px-2 py-1 rounded text-xs'>
                   フォローする
                 </button>
                 :

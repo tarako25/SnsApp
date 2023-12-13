@@ -12,7 +12,10 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
     const follow = await prisma.follow.findMany({
         where:{
-            userId: String(userId)
+            userId: String(userId),
+            followId: {
+              not: String(userId)
+          }
         },
         orderBy: {
             id: "desc",
