@@ -36,9 +36,9 @@ const getFollow = async(page: number, userId: any) => {
   }
 
   //フォロー解除
-  const handleCancelFollow = async (id: any) => {
-    console.log(id)
-    await fetch(`/api/InputFollow?Id=${id}&followId=${userId}`, {
+  const handleCancelFollow = async (id: any, followId: any, e: any) => {
+    e.preventDefault();
+    await fetch(`/api/InputFollow?Id=${id}&followId=${followId}`, {
       method: 'DELETE'
     });
     getFollow(page, userId)
@@ -57,7 +57,7 @@ const getFollow = async(page: number, userId: any) => {
             <div className='flex justify-center w-full items-center flex-col text-left'>
               <div className='flex justify-start items-center w-[95%]'>
                 <div className='w-[95%] font-bold mb-1 text-md'>{item.followname}</div>
-                <button onClick={() => {handleCancelFollow(item.id)}} className='border-gray-300 border-2 px-2 py-1 rounded text-xs'>
+                <button onClick={(e) => {handleCancelFollow(item.id, item.followId, e)}} className='border-gray-300 border-2 px-2 py-1 rounded text-xs'>
                   フォローを解除する
                 </button>
               </div>

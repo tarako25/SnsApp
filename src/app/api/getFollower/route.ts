@@ -23,7 +23,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
           skip:pageStart,
           take: pageItem,
     })
-    const follow = await prisma.follow.findFirst({
+    const follow = await prisma.follow.findMany({
       where:{        
           userId: String(userId)
       }

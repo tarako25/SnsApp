@@ -63,8 +63,21 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
         const userId = session.user.id
         const url = new URL(req.url);
-        const Id = url.searchParams.get("Id");
+        let Id = url.searchParams.get("Id");
         const followId = url.searchParams.get("followId");
+
+        console.log(followId)
+        if(!Id){
+            const userId = url.searchParams.get("userId");
+            const id = await prisma.follow.findFirst({
+                where:{
+                    userId: String(userId),
+                    followId: String(followId)
+                }
+            })
+            Id = String(id?.id)
+        }
+
         await prisma.follow.delete({
             where:{
                 id: String(Id)
@@ -75,11 +88,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 userId: String(userId),
             }
         })
+        console.log(userId,"followCount", followCount)
         const followerCount = await prisma.follow.count({
           where:{
               followId: String(followId),
           }
         })
+        console.log(followId,"followerCount", followerCount)
         await prisma.user.update({
             where:{
                 id: String(userId),

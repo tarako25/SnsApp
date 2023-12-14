@@ -12,7 +12,7 @@ export default function FollowUser(data: any) {
 
 const [follower, setFollower] = useState([null])
 const [userId, setUserId] = useState<string | undefined>(undefined);
-const [checkfollow, setCheckfollow] = useState(null);
+const [checkfollow, setCheckfollow] = useState<Array<{ userId: any, followId: any }>>([]);
 
 //Pganegation
 const [page, setPage] = useState(1);
@@ -32,6 +32,7 @@ const getFollower = async(page: number, userId: any) => {
     setCheckfollow(User.follow)
     const count = Math.ceil(User.count / pageItem);
     setPageCount(count);
+    console.log(User.follow)
 }
 
   if (follower[0] === null) {
@@ -39,11 +40,8 @@ const getFollower = async(page: number, userId: any) => {
   }
 
   //フォロー
-  const handleFollow = async(followName: any, followId: any) => {
-    console.log(data.userId)
-    console.log(data.userName)
-    console.log(followId)
-    console.log(followName)
+  const handleFollow = async(followName: any, followId: any, e: any) => {
+    e.preventDefault()
     const postData = {
       userId: data.userId, userName: data.userName, followId: followId, followName: followName
     }
@@ -58,8 +56,9 @@ const getFollower = async(page: number, userId: any) => {
     toast.success("フォローしました", { id: "1" });
   }
 //フォロー解除
-  const handleCancelFollow = async (id: any) => {
-    await fetch(`/api/InputFollow?Id=${id}&followId=${userId}`, {
+  const handleCancelFollow = async (userId: any, followId: any, e: any) => {
+    e.preventDefault()
+    await fetch(`/api/InputFollow?userId=${userId}&followId=${followId}`, {
       method: 'DELETE'
     });
     getFollower(page, userId)
@@ -78,14 +77,16 @@ const getFollower = async(page: number, userId: any) => {
             <div className='flex justify-center w-full items-center flex-col text-left'>
               <div className='flex justify-start items-center w-[95%]'>
                 <div className='w-[95%] font-bold mb-1 text-md'>{item.username}</div>
-                { !checkfollow ?
-                <button onClick={() => {handleFollow(item.followname,item.followId)}} className='border-gray-300 border-2 px-2 py-1 rounded text-xs'>
-                  フォローする
-                </button>
-                :
-                <button onClick={() => {handleCancelFollow(item.id)}} className='border-gray-300 border-2 px-2 py-1 rounded text-xs'>
+                { checkfollow?.some(follow => follow.followId === item.userId) ?
+                <button onClick={(e) => {handleCancelFollow(userId, item.userId, e)}} className='border-gray-300 border-2 px-2 py-1 rounded text-xs'>
                   フォローを解除する
                 </button>
+                :
+                <div>
+                  <button onClick={(e) => {handleFollow(item.username,item.userId, e)}} className='border-gray-300 border-2 px-2 py-1 rounded text-xs'>
+                  フォローする
+                </button>
+                </div>
               }
               </div>
             </div>
