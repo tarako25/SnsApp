@@ -7,7 +7,7 @@ export default function GoodPost(data: any) {
   return (
     <>
     <div className='mt-3 text-white'>
-      フォローしたユーザー
+      フォローユーザー
     </div>
     <SelectFollow userId={data.userId} userName={data.userName}/>
     </>

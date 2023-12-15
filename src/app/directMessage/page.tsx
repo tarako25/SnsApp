@@ -1,6 +1,6 @@
 "use client"
 import Header from "@/app/components/Header"
-import Profile  from '@/app/components/Profile'
+import DirectMessageList  from '@/app/components/DirectMessageList'
 import MenuBar from "@/app/components/MenuBar"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
@@ -40,9 +40,9 @@ const IndexPage = () => {
             <div className='w-full pb-3 rounded-sm normal flex justify-center'>
               <div className='w-[95%]'>
               <div className='mt-3 text-white'>
-                プロフィール
+                メッセージ
               </div>
-                <Profile userId={userId} userName={userName} />
+                <DirectMessageList userId={userId} userName={userName} />
               </div>
             </div>
           </div>

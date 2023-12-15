@@ -39,6 +39,9 @@ const IndexPage = () => {
           <div className='normal border-4 w-[100%] rounded-md border-neutral-400 md:w-[70%]'>
             <div className='w-full pb-3 rounded-sm normal flex justify-center'>
               <div className='w-[95%]'>
+              <div className='mt-3 text-white'>
+                Goodした投稿
+              </div>
                 <GoodPost userId={userId} userName={userName}/>
               </div>
             </div>

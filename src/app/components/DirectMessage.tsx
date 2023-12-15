@@ -1,10 +1,9 @@
 "use client";
 import sample from '@/imgs/sample2.png'
 import Image from 'next/image'
-import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import useSWR, { useSWRConfig } from "swr";
-
+import  LoadingPost  from "@/app/components/LoadingPost"
 export default function DirectMessage(userData: any) {
 
     const { mutate } = useSWRConfig();
@@ -69,7 +68,7 @@ export default function DirectMessage(userData: any) {
   }
 
   if (data == undefined || data.err) {
-    return <div>ユーザーの読み込み中...</div>;
+    return <LoadingPost />;
   }
 
   //メッセージを送信

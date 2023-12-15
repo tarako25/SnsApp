@@ -142,9 +142,6 @@ const handleChangeIntroduction = (e: any) => {
       </div>
     </div>
     <Toaster />
-      <div className='mt-3 text-white'>
-      プロフィール
-      </div>
         <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
             <div className='flex w-[95%] mt-3 flex-col'>
               <Image src={sample} alt="" width={75} className='border-2 border-gray-300 w-[75px] h-[75px] rounded-full'/>

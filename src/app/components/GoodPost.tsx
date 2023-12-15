@@ -73,9 +73,6 @@ export default function GoodPost(data: any) {
 
   return (
     <>
-    <div className='mt-3 text-white'>
-      Goodした投稿
-    </div>
      {/* 1記事 */}
     {post.map((item: any) => (
       <Link href={item.id} key={item.id}>
