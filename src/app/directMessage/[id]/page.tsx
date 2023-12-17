@@ -36,7 +36,7 @@ const IndexPage = () => {
         <Header />
         <div className="flex flex-col items-center justify-between w-full md:flex-row md:items-start">
           <MenuBar userId={userId} userName={userName}/>
-          <div className='normal border-4 w-[100%] rounded-md border-neutral-400 md:w-[70%]'>
+          <div className='normal border-4 w-[100%] rounded-md border-neutral-400 md:w-[70%] mb-5'>
             <div className='w-full pb-3 rounded-sm normal flex justify-center'>
               <div className='w-[95%]'>
                 <DirectMessage userId={userId} userName={userName} />

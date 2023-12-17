@@ -92,7 +92,7 @@ export default function DirectMessage(userData: any) {
 
   return (
     <>
-    <div className="my-5">
+    <div className="my-3">
         <div className="text h-[60px] w-full rounded-t bg-gray-200">
           <div className="items-ceneter flex h-full justify-center">
             <div className="flex items-center font-bold">

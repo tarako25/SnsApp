@@ -10,9 +10,9 @@ export default function page() {
     <>
     <div className='flex justify-center items-center h-screen'>
       <div className='w-full sm:w-[450px] bg-white'>
-        <div className='pt-[0px] sm:py-[50px] flex justify-start items-center flex-col bg-white sm:bg-neutral-200 w-full h-full rounded-xl'>
+        <div className='pt-[0px] sm:py-[50px] flex justify-start items-center flex-col bg-white sm:bg-neutral-500 w-full h-full rounded-xl'>
           <Image src={Logo} alt="" className='w-[175px] h-[60px] mb-7 sm:w-[215px] sm:h-[75px]'/>
-          <div className='flex justify-center items-start flex-col'>
+          {/* <div className='flex justify-center items-start flex-col'>
             <label htmlFor="" className='font-bold text-black mb-1 text-sm'>メールアドレス</label>
             <input type="text" placeholder="email" className='pl-2 rounded mb-3 w-[350px] h-[40px] border-2'/>
             <label htmlFor="" className='font-bold text-black mb-1 text-sm'>パスワード</label>
@@ -20,7 +20,7 @@ export default function page() {
             <button className='w-[350px] h-[40px] rounded bg-zinc-700 text-white'>
               ログイン
             </button>
-          </div>
+          </div> */}
           <div className='w-[350px] border my-4 border-zinc-400'></div>
           <button onClick={() => signIn("google")} className='bg-white mb-2 font-bold rounded w-[350px] h-[40px] border-2'>
             Googleでログイン
@@ -28,9 +28,9 @@ export default function page() {
           <button onClick={() => signIn("github")} className='bg-white mb-2 font-bold rounded w-[350px] h-[40px] border-2'>
               Githubでログイン
           </button>
-          <button className=' w-[350px] h-[40px] font-bold rounded bg-zinc-700 text-white'>
+          {/* <button className=' w-[350px] h-[40px] font-bold rounded bg-zinc-700 text-white'>
               アカウント登録はこちら
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
