@@ -2,6 +2,7 @@
 import Header from "@/app/components/Header"
 import Select  from '@/app/components/Select'
 import MenuBar from "@/app/components/MenuBar"
+import SideBar from "@/app/components/SideBar"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react"
@@ -36,10 +37,11 @@ const IndexPage = () => {
     <>
     <div className="relative flex justify-center items-center w-full flex-col">
       <Header userId={userId} userName={userName}/>
-      <div className="w-[100%] flex justify-center items-center flex-col sm:w-[70%] md:w-[80%] xl:w-[800px]">
-        <div className="flex flex-col items-center justify-between w-full md:flex-row md:items-start">
+      <div className="w-[95%] flex justify-center items-center flex-col sm:w-[70%] md:w-[75%] xl:w-[1200px]">
+        <div className="flex mt-0 flex-col items-center justify-between w-full md:flex-row md:items-start sm:mt-5">
           <MenuBar userId={userId} userName={userName}/>
           <Select userId={userId} userName={userName}/>
+          <SideBar userId={userId} userName={userName} />
         </div>
       </div>
     </div>

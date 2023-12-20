@@ -44,7 +44,7 @@ const getProfileData = async(userId:any) => {
   setInputIntroduction(data.user.inputIntroduction)
 }
 if (profileData === null) {
-  return <LoadingPost />; // ローディング画面を表示
+  return <div className='w-full flex justify-center items-center'><LoadingPost /></div>; // ローディング画面を表示
 } 
 //プロフィール編集
 const handleEdit = async(e: any) => {
@@ -142,7 +142,7 @@ const handleChangeIntroduction = (e: any) => {
       </div>
     </div>
     <Toaster />
-        <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
+        <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col w-full'>
             <div className='flex w-[95%] mt-3 flex-col'>
               <Image src={sample} alt="" width={75} className='border-2 border-gray-300 w-[75px] h-[75px] rounded-full'/>
               <div className='flex justify-between items-start mt-3'>
@@ -157,7 +157,7 @@ const handleChangeIntroduction = (e: any) => {
                 <div className='flex flex-col text-sm'>
                   {/* ログイン中のidとurlのidが等しいとき */}
                   {data.userId === userId ? 
-                    <button onClick={openEdit} className='border-gray-300 border-2 p-2 rounded'>
+                    <button onClick={openEdit} className='border-color p-2 rounded'>
                       プロフィールを編集する
                     </button>
                     : 
@@ -199,8 +199,9 @@ const handleChangeIntroduction = (e: any) => {
               </div>
             </div>
           </div>
-          <div className='border border-gray mt-3'></div>
+        <div className='w-full'>
           <ProfilePost userId={data.userId} userName={data.userName} profileUserId={profileData?.id}/>
+        </div>
     </>
   )
 }

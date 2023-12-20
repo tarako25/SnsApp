@@ -73,9 +73,9 @@ export default function AllPost(data: any) {
     {/* 1記事 */}
     {post.map((item: any) => (
       <Link href={item.id} key={item.id}>
-      <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
+      <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
         <div className='flex w-[95%] mt-3'>
-          <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-2 border-zinc-400'/>
+        <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
           <div className='flex justify-center w-full items-center flex-col text-left'>
             <div className='flex justify-start items-center w-[95%]'>
               <div className='w-[95%] font-bold mb-1 text-md'>{item.username}</div>
@@ -114,7 +114,6 @@ export default function AllPost(data: any) {
     <div className='w-full mt-3 flex justify-center'>
     <Pagination
       count={pageCount}
-      color="primary"
       page={page}
       onChange={(e, page) => setPage(page)}
     />

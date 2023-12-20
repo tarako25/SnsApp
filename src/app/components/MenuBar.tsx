@@ -54,18 +54,17 @@ export default function MenuBar(data: any) {
 
   return (
     <>
-      <div className='w-[100%] md:w-[30%] flex'>
+      <div className='w-[100%] md:w-[25%] xl:w-[20%] flex'>
         <div className='rounded w-[100%] flex justify-start flex-row md:flex-col'>
           <div className='w-[100%] flex-row flex justify-between md:flex-col pb-2 md:pb-0'>
             {MenuElements.map((items, index) =>
-              <Link href={items.link} key={index} className={`cursor-pointer flex justify-center items-center h-[45px] rounded-md  hover:text-white border-4  md:h-[65px] md:mb-3 w-[20%] md:w-[100%] bg-white hover:bg-black md:flex ${items.class === 'none' ? 'hidden' : ''}`}>
-                <div className='mx-3'>{items.icon}</div>
-                <div className='w-full text-left font-bold text-sm tracking-[3px] hidden md:block xl:text-lg'>{items.MenuName}</div>
+              <Link href={items.link} key={index} className={`px-2 cursor-pointer flex justify-center items-center h-[45px] rounded-md text-color border-color bg-color  md:h-[55px] md:mb-3 w-[20%] md:w-[100%] md:flex ${items.class === 'none' ? 'hidden' : ''}`}>
+                <div className='mr-2'>{items.icon}</div>
+                <div className='w-full text-left font-bold text-sm tracking-[3px] hidden md:block'>{items.MenuName}</div>
               </Link>
             )}
           </div>
         </div>
-        <div className='border-2 borderline mx-4 hidden md:block'></div>
       </div>
     </>
   )

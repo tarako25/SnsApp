@@ -2,20 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-.normal {
-    background-color: rgb(113 113 122);
-}
-.fontc {
-    color: rgb(110, 110, 110);
-}
-.borderline {
-    border: solid 1px;
-    color: rgb(212, 215, 221);
-}
-.fcolor {
-    color: rgb(114, 114, 114);
+.border-color {
+  border: 1px solid #d4d4d8
 }
 
+.bg-color {
+  background-color: white;
+}
+
+.bg-color:hover {
+  background-color: #3f3f46
+}
+
+.text-color {
+  color: #3f3f46
+}
+
+.text-color:hover {
+  color: white;
+}
 @keyframes spin {
   100% {
     transform: rotate(360deg);
