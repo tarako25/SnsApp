@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex items-center flex-col"> 
+      <body className="flex items-center flex-col bg-gray-100"> 
         <NextAuthProvider>{children}</NextAuthProvider>
       </body>
     </html>

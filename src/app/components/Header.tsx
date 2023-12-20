@@ -2,33 +2,33 @@
 import Image from 'next/image'
 import React from 'react'
 import Logo from '@/imgs/logo.png'
+import sample from '@/imgs/sample2.png'
 import Link from 'next/link'
-import { redirect } from "next/navigation";
-import { signOut, useSession } from "next-auth/react"
 
-export default function Header() {
+export default function Header(data: any) {
 
-  const { data: session } = useSession()
-
-  const handleLogout = () => {
-    signOut();
-  }
   return (
     <>
-      <div className='mt-4 mb-5 w-full md:mt-7 md:mb-10 '>
+      <div className='p-3 w-full flex justify-center items-center bg-white'>
+      <div className="w-[95%] flex justify-center items-center flex-col sm:w-[70%] md:w-[80%] xl:w-[800px]">
         <div className='flex justify-center items-center w-full'>
           <div className='w-full flex justify-between items-center'>
             <Link href="/">
               <Image src={Logo} className='w-[125px] h-[45px] md:w-[175px] md:h-[60px]' alt="Logo"/>
             </Link>
-            {session === null ?
-            ""
-            :
-            <button onClick={handleLogout} className='h-[40px] md:[60px] flex justify-center items-center px-2 rounded-md border-4 border-neutral-400 normal hover:bg-neutral-400 cursor-pointer'>
-            <div className='text-centerfont-bold text-xs tracking-[1px] px-2 text-white md:text-base'>ログアウト</div>
-            </button>
-            }
+              {data.userName ?
+              <div className='flex justify-center items-center'>
+                <Image src={sample} alt="" className='w-[50px] h-[50px] rounded-full' />
+                <div className='ml-3 font-bold'>{data.userName}</div>
+              </div>
+              :
+              <div className='flex justify-center items-center'>
+                <Image src={sample} alt="" className='w-[50px] h-[50px] rounded-full' />
+                <div className='ml-3 font-bold w-[50px]'></div>
+              </div>
+              }
           </div>
+        </div>
         </div>
       </div>
     </>

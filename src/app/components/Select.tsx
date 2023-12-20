@@ -14,8 +14,8 @@ export default function Select(data: any) {
   }
   return (
     <>
-    <div className='normal border-4 w-[100%] rounded-md border-neutral-400 md:w-[70%]'>
-        <div className='w-full pb-3 rounded-sm normal flex justify-center'>
+    <div className='w-[100%] rounded-md md:w-[70%]'>
+        <div className='w-full pb-3 rounded-sm flex justify-center'>
           <div className='w-[95%]'>
             {/* 投稿切り替えボタン */}
             <div className='w-full mt-3 rounded flex justify-around h-[50px]'>

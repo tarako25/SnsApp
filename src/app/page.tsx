@@ -34,9 +34,9 @@ const IndexPage = () => {
 
   return (
     <>
-    <div className="relative flex justify-center items-center w-full">
+    <div className="relative flex justify-center items-center w-full flex-col">
+      <Header userId={userId} userName={userName}/>
       <div className="w-[100%] flex justify-center items-center flex-col sm:w-[70%] md:w-[80%] xl:w-[800px]">
-        <Header />
         <div className="flex flex-col items-center justify-between w-full md:flex-row md:items-start">
           <MenuBar userId={userId} userName={userName}/>
           <Select userId={userId} userName={userName}/>
