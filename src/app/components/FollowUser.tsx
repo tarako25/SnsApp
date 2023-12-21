@@ -51,13 +51,13 @@ const getFollow = async(page: number, userId: any) => {
     {/* 1記事 */}
     {follow.map((item: any) => (
         <Link href={`/profile/${item.followId}`} key={item.id}>
-        <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
+        <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
           <div className='flex w-[95%] my-3'>
-            <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-2 border-zinc-400'/>
+            <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
             <div className='flex justify-center w-full items-center flex-col text-left'>
               <div className='flex justify-start items-center w-[95%]'>
                 <div className='w-[95%] font-bold mb-1 text-md'>{item.followname}</div>
-                <button onClick={(e) => {handleCancelFollow(item.id, item.followId, e)}} className='border-gray-300 border-2 px-2 py-1 rounded text-xs'>
+                <button onClick={(e) => {handleCancelFollow(item.id, item.followId, e)}} className='border-color bg-color text-color px-2 py-1 rounded text-xs'>
                   フォローを解除する
                 </button>
               </div>
@@ -69,7 +69,6 @@ const getFollow = async(page: number, userId: any) => {
   <div className='w-full mt-3 flex justify-center'>
     <Pagination
       count={pageCount}
-      color="primary"
       page={page}
       onChange={(e, page) => setPage(page)}
     />

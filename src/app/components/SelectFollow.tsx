@@ -15,14 +15,16 @@ export default function SelectFollow(data: any) {
   return (
     <>
     <div className='w-full mt-3 rounded flex justify-around h-[50px]'>
-        <div onClick={handleAll} className='w-[50%] text-sm md:text-base fontc flex justify-center items-center border-2 rounded cursor-pointer font-bold text-md bg-white border-zinc-200'>
+        <div onClick={handleAll} className='w-[50%] text-sm md:text-base flex justify-center items-center rounded cursor-pointer font-bold text-md border-color bg-color text-color'>
             フォロー
         </div>
-        <div onClick={handleFollow} className='w-[50%] text-sm md:text-base fontc flex justify-center items-center border-2 rounded cursor-pointer font-bold text-md bg-white border-zinc-200'>
+        <div onClick={handleFollow} className='w-[50%] text-sm md:text-base flex justify-center items-center rounded cursor-pointer font-bold text-md border-color bg-color text-color'>
             フォロワー
         </div>
     </div>
-    {switchbtn ? <FollowUser userId={data.userId} userName={data.userName}/> : <FollowerUser userId={data.userId} userName={data.userName} />}
+    <div className='w-full'>
+      {switchbtn ? <FollowUser userId={data.userId} userName={data.userName}/> : <FollowerUser userId={data.userId} userName={data.userName} />}
+    </div>
     </>
   )
 }

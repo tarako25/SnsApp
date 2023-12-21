@@ -44,7 +44,7 @@ const getProfileData = async(userId:any) => {
   setInputIntroduction(data.user.inputIntroduction)
 }
 if (profileData === null) {
-  return <div className='w-full flex justify-center items-center'><LoadingPost /></div>; // ローディング画面を表示
+  return <LoadingPost />; // ローディング画面を表示
 } 
 //プロフィール編集
 const handleEdit = async(e: any) => {
@@ -144,7 +144,7 @@ const handleChangeIntroduction = (e: any) => {
     <Toaster />
         <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col w-full'>
             <div className='flex w-[95%] mt-3 flex-col'>
-              <Image src={sample} alt="" width={75} className='border-2 border-gray-300 w-[75px] h-[75px] rounded-full'/>
+              <Image src={sample} alt="" width={75} className='border-color w-[75px] h-[75px] rounded-full'/>
               <div className='flex justify-between items-start mt-3'>
                 <div>
                   <div>
@@ -157,16 +157,16 @@ const handleChangeIntroduction = (e: any) => {
                 <div className='flex flex-col text-sm'>
                   {/* ログイン中のidとurlのidが等しいとき */}
                   {data.userId === userId ? 
-                    <button onClick={openEdit} className='border-color p-2 rounded'>
+                    <button onClick={openEdit} className='border-color bg-color text-color p-2 rounded'>
                       プロフィールを編集する
                     </button>
                     : 
                     !checkfollow ? 
                     <div className='flex'>
-                      <button onClick={() => {handleFollow(userName,userId)}} className='border-gray-300 border-2 py-2 px-3 rounded'>
+                      <button onClick={() => {handleFollow(userName,userId)}} className='border-color bg-color text-color py-2 px-3 rounded'>
                       フォローする
                       </button>
-                      <div className='ml-2 border-2 border-gray-300 rounded-full w-[40px] h-[40px] flex justify-center items-center'>
+                      <div className='ml-2 border-color bg-color text-color rounded-full w-[40px] h-[40px] flex justify-center items-center'>
                       <Link href={`/directMessage/${userId}`}>
                         <MailOutlineIcon />
                       </Link>
@@ -174,10 +174,10 @@ const handleChangeIntroduction = (e: any) => {
                     </div>
                     :
                     <div className='flex items-center'>
-                      <button onClick={() => {handleCancelFollow(checkfollow)}} className='border-gray-300 border-2 py-2 px-3 rounded'>
+                      <button onClick={() => {handleCancelFollow(checkfollow)}} className='border-color bg-color text-color py-2 px-3 rounded'>
                       フォローを解除する
                       </button>
-                      <div className='ml-2 border-2 border-gray-300 rounded-full w-[40px] h-[40px] flex justify-center items-center'>
+                      <div className='ml-2 border-color bg-color text-color rounded-full w-[40px] h-[40px] flex justify-center items-center'>
                       <Link href={`/directMessage/${userId}`}>
                         <MailOutlineIcon />
                       </Link>

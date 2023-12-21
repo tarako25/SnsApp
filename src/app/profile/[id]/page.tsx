@@ -44,7 +44,9 @@ const IndexPage = () => {
             <div className=' text-black font-bold'>
               プロフィール
             </div>
-            <Profile userId={userId} userName={userName} />
+            <div className="w-full">
+              <Profile userId={userId} userName={userName} />
+            </div>
           </div>
           <SideBar userId={userId} userName={userName} />
         </div>
