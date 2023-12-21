@@ -62,7 +62,6 @@ export default function DirectMessage(userData: any) {
     setUserdata(data.user);
     setTargetdata(data.targetuser);
   };
-  console.log(data)
   if (error) {
     return <div>ユーザーの取得に失敗しました：{error.message}</div>;
   }
@@ -75,7 +74,6 @@ export default function DirectMessage(userData: any) {
   const SendMessage = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    console.log(formData.get("message"))
     if(formData.get("message") == ""){
         return
     }
@@ -92,16 +90,16 @@ export default function DirectMessage(userData: any) {
 
   return (
     <>
-    <div className="my-3">
-        <div className="text h-[60px] w-full rounded-t bg-gray-200">
+    <div className="mb-5 border-color rounded">
+        <div className="h-[60px] w-full rounded-t bg-color-none">
           <div className="items-ceneter flex h-full justify-center">
-            <div className="flex items-center font-bold">
+            <div className="flex items-center font-bold text-white">
               {targetdata.name}
             </div>
           </div>
         </div>
         <div
-          className="mb-2 h-[700px] w-full overflow-y-auto bg-white pb-4"
+          className="h-[700px] w-full overflow-y-auto bg-white pb-4"
           id="scroll"
         >
           <div className="flex justify-center ">
@@ -113,7 +111,7 @@ export default function DirectMessage(userData: any) {
                 .map((item: any) =>
                   item.userId == userData.userId ? (
                     <li key={item.id} className="mt-6 flex items-center">
-                      <div className="mr-4 h-14 w-14 overflow-hidden rounded-full border border-gray-300">
+                      <div className="mr-4 h-14 w-14 overflow-hidden rounded-full border-color">
                         <Image
                           alt="アイコン"
                           src={sample}
@@ -140,7 +138,7 @@ export default function DirectMessage(userData: any) {
                       <div className="rounded-xl bg-gray-300 px-3 py-1 text-xl ml-2">
                         {item.content}
                       </div>
-                      <div className="ml-4 h-14 w-14 overflow-hidden rounded-full border border-gray-300">
+                      <div className="ml-4 h-14 w-14 overflow-hidden rounded-full border-color">
                         <Image
                           alt="アイコン"
                           src={sample}
@@ -155,13 +153,14 @@ export default function DirectMessage(userData: any) {
             </ul>
           </div>
         </div>
-        <form onSubmit={SendMessage} className="flex justify-between">
+        <form onSubmit={SendMessage} className="flex justify-between p-3 bg-color-none rounded-b">
           <input
             name="message"
             type="text"
-            className="h-10 w-4/5 rounded pl-3"
+            className="h-10 w-4/5 rounded pl-3 border-color"
+            placeholder='メッセージを送信'
           />
-          <button className="w-1/6 rounded border text-white">送信</button>
+          <button className="w-1/6 rounded border-color bg-color text-color font-bold">送信</button>
         </form>
       </div>
     </>

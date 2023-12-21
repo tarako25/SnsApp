@@ -24,7 +24,6 @@ const getDirectMessageUserList = async(page: number) => {
     const count = Math.ceil(data.count / pageItem);
     setPageCount(count);
     setUser(data.uniqueUsers)
-    console.log(data.uniqueUsers)
 }
 if (user[0] === null) {
   return <LoadingPost />; // ローディング画面を表示
@@ -34,9 +33,9 @@ if (user[0] === null) {
     {user.map((item: any) => (
       item.targetname == data.userName ?
       <Link href={`directMessage/${item.id}`}>
-        <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
+        <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
           <div className='flex w-[95%] my-3'>
-            <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-2 border-zinc-400'/>
+            <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
             <div className='flex justify-center w-full items-center flex-col text-left'>
               <div className='flex items-left w-[95%] flex-col'>
                 <div className='font-bold mb-1 text-md'>{item.username}</div>
@@ -51,14 +50,14 @@ if (user[0] === null) {
       </Link>
       :
       <Link href={`directMessage/${item.id}`}>
-        <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
+        <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
           <div className='flex w-[95%] my-3'>
-            <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-2 border-zinc-400'/>
+            <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
             <div className='flex justify-center w-full items-center flex-col text-left'>
               <div className='flex items-left w-[95%] flex-col'>
                 <div className='font-bold mb-1 text-md'>{item.targetname}</div>
                 <div className='flex'>
-                  <div>メッセージ：</div>
+                  <div className='text-sm'>メッセージ：</div>
                   <div className="text-gray-400 text-sm">{item.content}</div>
                 </div>
               </div>
@@ -70,7 +69,6 @@ if (user[0] === null) {
   <div className='w-full mt-3 flex justify-center'>
     <Pagination
       count={pageCount}
-      color="primary"
       page={page}
       onChange={(e, page) => setPage(page)}
     />

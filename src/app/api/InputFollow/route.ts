@@ -51,7 +51,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         { status: 201 },
       );
     } catch (err) {
-        console.log(err)
       return NextResponse.json({ err, message: "Error" }, { status: 500 });
     } finally {
       await prisma.$disconnect();
@@ -66,7 +65,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let Id = url.searchParams.get("Id");
         const followId = url.searchParams.get("followId");
 
-        console.log(followId)
         if(!Id){
             const userId = url.searchParams.get("userId");
             const id = await prisma.follow.findFirst({
@@ -88,13 +86,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 userId: String(userId),
             }
         })
-        console.log(userId,"followCount", followCount)
         const followerCount = await prisma.follow.count({
           where:{
               followId: String(followId),
           }
         })
-        console.log(followId,"followerCount", followerCount)
         await prisma.user.update({
             where:{
                 id: String(userId),
@@ -116,7 +112,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         { status: 201 },
       );
     } catch (err) {
-        console.log(err)
       return NextResponse.json({ err, message: "Error" }, { status: 500 });
     } finally {
       await prisma.$disconnect();

@@ -31,7 +31,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
                 good: true,
             },
         });
-        console.log(count)
       return NextResponse.json(
         { data, count,  message: "Success" },
         { status: 201 },

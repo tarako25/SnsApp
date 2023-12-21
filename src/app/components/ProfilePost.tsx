@@ -110,7 +110,6 @@ export default function ProfilePost(data: any) {
     <div className='w-full mt-3 flex justify-center'>
     <Pagination
       count={pageCount}
-      color="primary"
       page={page}
       onChange={(e, page) => setPage(page)}
     />

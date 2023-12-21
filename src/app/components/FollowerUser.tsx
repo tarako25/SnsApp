@@ -32,7 +32,6 @@ const getFollower = async(page: number, userId: any) => {
     setCheckfollow(User.follow)
     const count = Math.ceil(User.count / pageItem);
     setPageCount(count);
-    console.log(User.follow)
 }
 
   if (follower[0] === null) {

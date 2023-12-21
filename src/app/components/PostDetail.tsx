@@ -81,18 +81,18 @@ export default function PostDetail(data: any) {
 
   return (
     <>
-    <div className='normal border-4 w-[100%] rounded-md border-neutral-400 md:w-[70%]'>
-      <div className='w-full pb-3 rounded-sm normal flex justify-center'>
+    <div className='w-[100%] rounded-md md:w-[70%]'>
+      <div className='w-full pb-3 rounded-sm flex justify-center'>
         <div className='w-[95%]'>
           <Link href="/">
-            <div className='mt-3 text-white'>
+            <div className='mt-3 text-black font-bold'>
               <ArrowLeftIcon /> 投稿
             </div>
           </Link>
-          <div className='border-2  border-zinc-300 rounded mt-3 bg-white flex justify-start items-center flex-col'>
+          <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
               {/* 記事詳細 */}
               <Link href={`/profile/${post.userId}`} className='flex w-[95%] mt-3'>
-                    <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-2 border-zinc-400'/>
+                    <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
                     <div className='flex justify-center w-full items-center flex-col text-left'>
                         <div className='flex justify-start items-center w-[95%]'>
                         <div className='w-[95%] font-bold mt-2 mb-5 text-[18px]'>{post?.username}</div>

@@ -6,11 +6,11 @@ import Link from 'next/link';
 export default function LoadingPostDetail() {
   return (
     <>
-    <div className='normal border-4 w-[100%] rounded-md border-neutral-400 md:w-[70%]'>
+    <div className='w-[100%] rounded-md  md:w-[70%]'>
       <div className='w-full pb-3 rounded-sm normal flex justify-center'>
         <div className='w-[95%]'>
         <Link href="/">
-          <div className='mt-3 text-white'>
+          <div className='mt-3 text-black font-bold'>
             <ArrowLeftIcon /> 投稿
           </div>
         </Link>

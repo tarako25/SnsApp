@@ -22,7 +22,7 @@ export default function MenuBar(data: any) {
     {
         MenuName: "プロフィール",
         link: `/profile/${data.userId}`,
-        icon:<ManageAccountsIcon />,
+        icon:<PersonIcon />,
         class:"default",
     },
     {
@@ -45,9 +45,9 @@ export default function MenuBar(data: any) {
         id:"true"
     },
     {
-        MenuName: "開発検証ページ",
-        link: "/sample",
-        icon:<PersonIcon />,
+        MenuName: "アカウント設定",
+        link: "/setting",
+        icon:<ManageAccountsIcon />,
         class:"default",
     },
 ]
