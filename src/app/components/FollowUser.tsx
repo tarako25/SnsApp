@@ -28,7 +28,11 @@ const getFollow = async(page: number, userId: any) => {
     const User = await response.json();
     setFollow(User.follow)
     const count = Math.ceil(User.count / pageItem);
-    setPageCount(count);
+    if(count < 0){
+      setPageCount(count);
+    } else {
+      setPageCount(1)
+    }
 }
 
   if (follow[0] === null) {
@@ -49,7 +53,9 @@ const getFollow = async(page: number, userId: any) => {
     <>
     <Toaster />
     {/* 1記事 */}
-    {follow.map((item: any) => (
+    {
+    follow.length != 0 ?
+    follow.map((item: any) => (
         <Link href={`/profile/${item.followId}`} key={item.id}>
         <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
           <div className='flex w-[95%] my-3'>
@@ -65,7 +71,12 @@ const getFollow = async(page: number, userId: any) => {
           </div>
         </div>
       </Link>
-    ))}
+    ))
+    :
+    <div className='flex justify-center items-center mt-3'>
+      <div>フォローしたユーザーがいません</div>
+    </div>
+    }
   <div className='w-full mt-3 flex justify-center'>
     <Pagination
       count={pageCount}

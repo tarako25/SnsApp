@@ -187,10 +187,10 @@ const handleChangeIntroduction = (e: any) => {
               </div>
               <div className='mt-3 flex justify-start items-center'>
                 <div className='mr-2'>
-                  フォロー {profileData?.followCount}
+                  <Link href={`/follow/${profileData?.id}`}>フォロー {profileData?.followCount}</Link>
                 </div>
                 <div className='mr-2'>
-                  フォロワー {profileData?.followerCount}
+                  <Link href={`/follow/${profileData?.id}`}>フォロワー {profileData?.followerCount}</Link>
                 </div>
               </div>
               <div className='my-3'>

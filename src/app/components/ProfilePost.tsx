@@ -26,7 +26,11 @@ export default function ProfilePost(data: any) {
     const Post = await response.json();
     setPost(Post.data)
     const count = Math.ceil(Post.count / pageItem);
-    setPageCount(count);
+    if(count < 0){
+      setPageCount(count);
+    } else {
+      setPageCount(1)
+    }
   }
   if (post[0] === null) {
     return <LoadingPost />; // ローディング画面を表示
@@ -67,7 +71,9 @@ export default function ProfilePost(data: any) {
   return (
     <>
      {/* 1記事 */}
-     {post.map((item: any) => (
+     {
+     post.length != 0 ?
+     post.map((item: any) => (
       <Link href={`/${item.id}`} key={item.id}>
       <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
         <div className='flex w-[95%] mt-3'>
@@ -106,7 +112,12 @@ export default function ProfilePost(data: any) {
         </div>
       </div>
     </Link>
-    ))}
+    ))
+  :
+  <div className='flex justify-center items-center mt-3'>
+    <div>投稿がありません</div>
+  </div>
+  }
     <div className='w-full mt-3 flex justify-center'>
     <Pagination
       count={pageCount}

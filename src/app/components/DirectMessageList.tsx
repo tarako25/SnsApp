@@ -22,7 +22,11 @@ const getDirectMessageUserList = async(page: number) => {
     const data = await response.json();
 
     const count = Math.ceil(data.count / pageItem);
-    setPageCount(count);
+    if(count < 0){
+      setPageCount(count);
+    } else {
+      setPageCount(1)
+    }
     setUser(data.uniqueUsers)
 }
 if (user[0] === null) {
@@ -30,7 +34,9 @@ if (user[0] === null) {
 }
   return (
     <>
-    {user.map((item: any) => (
+    {
+    user.length != 0 ?
+    user.map((item: any) => (
       item.targetname == data.userName ?
       <Link href={`directMessage/${item.id}`}>
         <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
@@ -65,7 +71,12 @@ if (user[0] === null) {
           </div>
         </div>
       </Link>
-    ))}
+    ))
+  :
+  <div className='flex justify-center items-center mt-3'>
+    <div>メッセージがありません</div>
+  </div>
+  }
   <div className='w-full mt-3 flex justify-center'>
     <Pagination
       count={pageCount}
