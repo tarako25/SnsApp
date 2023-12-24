@@ -122,7 +122,7 @@ export default function GoodPost(data: any) {
     ))
     :
     <div className='flex justify-center items-center mt-3'>
-      <div>フォローしたユーザーがいません</div>
+      <div>Goodした投稿がありません</div>
     </div>
     }
     <div className='w-full mt-3 flex justify-center'>
