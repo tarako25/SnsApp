@@ -5,12 +5,6 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 
 const prisma = new PrismaClient()
 
-console.log(process.env.NEXTAUTH_SECRET)
-console.log(process.env.GITHUB_CLIENT_ID)
-console.log(process.env.GITHUB_CLIENT_SECRET)
-console.log(process.env.GOOGLE_CLIENT_ID)
-console.log(process.env.GOOGLE_CLIENT_SECRET)
-console.log(process.envDATABASE_URL)
 export const authOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     adapter: PrismaAdapter(prisma),
