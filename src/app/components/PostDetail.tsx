@@ -27,9 +27,7 @@ export default function PostDetail(data: any) {
   const [post, setPost] = useState<PostType | null>(null);
 
   useEffect(() => {
-    const postIdUrl = location.pathname.slice(1);
-    const postId = postIdUrl.split("/")[0];
-    getPostDetail(postId)
+    getPostDetail(data.id)
   },[])
 
   const getPostDetail = async(postId: any) => {
@@ -126,7 +124,7 @@ export default function PostDetail(data: any) {
                       </div>
               </Link>
           </div>
-          <ToPost userId={data.userId} userName={data.userName} getPostDetail={getPostDetail}/>
+          <ToPost userId={data.userId} userName={data.userName} getPostDetail={getPostDetail} id={data.id}/>
         </div>
       </div>
     </div>

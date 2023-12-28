@@ -23,7 +23,7 @@ export default function SelectFollow(data: any) {
         </div>
     </div>
     <div className='w-full'>
-      {switchbtn ? <FollowUser userId={data.userId} userName={data.userName}/> : <FollowerUser userId={data.userId} userName={data.userName} />}
+      {switchbtn ? <FollowUser userId={data.userId} userName={data.userName} id={data.id}/> : <FollowerUser userId={data.userId} userName={data.userName} id={data.id}/>}
     </div>
     </>
   )

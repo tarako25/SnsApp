@@ -2,7 +2,7 @@
 import React from 'react'
 import  SelectFollow  from "@/app/components/SelectFollow"
 
-export default function GoodPost(data: any) {
+export default function FollowUser(data: any) {
 
   return (
     <>
@@ -10,7 +10,7 @@ export default function GoodPost(data: any) {
       <div className=' text-black font-bold'>
         フォローユーザー
       </div>
-      <SelectFollow userId={data.userId} userName={data.userName}/>
+      <SelectFollow userId={data.userId} userName={data.userName} id={data.id}/>
     </div>
     </>
   )

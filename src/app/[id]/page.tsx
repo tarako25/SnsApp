@@ -14,7 +14,7 @@ type User = {
   id?: string | null;
 };
 
-const IndexPage = () => {
+const IndexPage = ({ params }: { params: { id: string } }) => {
 
   
   const [userId, setUserId] = useState<string | null | undefined>(null);
@@ -40,7 +40,7 @@ const IndexPage = () => {
       <div className="w-[95%] flex justify-center items-center flex-col sm:w-[70%] md:w-[75%] xl:w-[1200px]">
         <div className="flex mt-0 flex-col items-center justify-between w-full md:flex-row md:items-start sm:mt-5">
           <MenuBar userId={userId} userName={userName}/>
-          <PostDetail userId={userId} userName={userName}/>
+          <PostDetail userId={userId} userName={userName} id={params.id}/>
           <SideBar userId={userId} userName={userName} />
         </div>
       </div>

@@ -22,16 +22,13 @@ export default function Profile(data: any) {
   const [inputIntroduction, setInputIntroduction] = useState("")
   const [isEditModal, setIsEditModal] = useState(false);
   const [userName, setUserName] = useState<string | undefined>(undefined);
-  const [userId, setUserId] = useState<string | undefined>(undefined);
+  const userId = data.id;
   const [profileData, setProfileData] = useState<ProfileData | null>(null)
   const [checkfollow, setCheckfollow] = useState(null);
   useEffect(() => {
     document.getElementById("edit")
     if(data.userId){
-      const userIdUrl = location.pathname.slice(1);
-      const userId = userIdUrl.split("/").pop();
       getProfileData(userId)
-      setUserId(userId)
     }
   },[data])
 const getProfileData = async(userId:any) => {
@@ -150,7 +147,7 @@ const handleChangeIntroduction = (e: any) => {
                     {profileData?.name}
                   </div>
                   <div>
-                    @{profileData?.id}
+                    @{profileData.id}
                   </div>
                 </div>
                 <div className='flex flex-col text-sm'>
@@ -187,10 +184,10 @@ const handleChangeIntroduction = (e: any) => {
               </div>
               <div className='mt-3 flex justify-start items-center'>
                 <div className='mr-2'>
-                  <Link href={`/follow/${profileData?.id}`}>フォロー {profileData?.followCount}</Link>
+                  <Link href={`/follow/${profileData.id}`}>フォロー {profileData?.followCount}</Link>
                 </div>
                 <div className='mr-2'>
-                  <Link href={`/follow/${profileData?.id}`}>フォロワー {profileData?.followerCount}</Link>
+                  <Link href={`/follow/${profileData.id}`}>フォロワー {profileData?.followerCount}</Link>
                 </div>
               </div>
               <div className='my-3'>
@@ -199,7 +196,7 @@ const handleChangeIntroduction = (e: any) => {
             </div>
           </div>
         <div className='w-full'>
-          <ProfilePost userId={data.userId} userName={data.userName} profileUserId={profileData?.id}/>
+          <ProfilePost userId={data.userId} userName={data.userName} id={data.id}/>
         </div>
     </>
   )

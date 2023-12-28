@@ -22,7 +22,7 @@ export default function ProfilePost(data: any) {
   },[page])
 
   const ProfilePost = async(page: number) => {
-    const response = await fetch(`/api/getProfilePost?page=${page}&userId=${data.profileUserId}`);
+    const response = await fetch(`/api/getProfilePost?page=${page}&userId=${data.id}`);
     const Post = await response.json();
     setPost(Post.data)
     const count = Math.ceil(Post.count / pageItem);

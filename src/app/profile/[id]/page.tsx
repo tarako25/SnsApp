@@ -14,7 +14,7 @@ type User = {
   id?: string | null;
 };
 
-const IndexPage = () => {
+const IndexPage = ({ params }: { params: { id: string } }) => {
 
   
   const [userId, setUserId] = useState<string | null | undefined>(null);
@@ -45,7 +45,7 @@ const IndexPage = () => {
               プロフィール
             </div>
             <div className="w-full">
-              <Profile userId={userId} userName={userName} />
+              <Profile userId={userId} userName={userName} id={params.id}/>
             </div>
           </div>
           <SideBar userId={userId} userName={userName} />

@@ -13,16 +13,13 @@ import ChatIcon from "@mui/icons-material/Chat";
 export default function ToPost(data: any) {
 
   const [post, setPost] = useState([])
-  const [postid, setPostId] = useState("")
+  const postId = data.id
   //Pganegation
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
-    const postIdUrl = location.pathname.slice(1);
-    const postId = postIdUrl.split("/")[0];
     getToPost(page, postId);
-    setPostId(postId)
   },[page])
 
   const getToPost = async(page: number, postId: any) => {
@@ -51,7 +48,7 @@ export default function ToPost(data: any) {
     if (!response.ok) {
       console.error("HTTPエラー:", response.statusText);
     }
-    getToPost(page, postid)
+    getToPost(page, postId)
   }
 
   //Goodキャンセルしたときの処理
@@ -68,12 +65,12 @@ export default function ToPost(data: any) {
     if (!response.ok) {
       console.error("HTTPエラー:", response.statusText);
     }
-    getToPost(page, postid)
+    getToPost(page, postId)
   }
 
   return (
     <>
-    <InputPost userId={data.userId} userName={data.userName} To={postid} page={page} getToPost={getToPost} getPostDetail={data.getPostDetail}/>
+    <InputPost userId={data.userId} userName={data.userName} To={postId} page={page} getToPost={getToPost} getPostDetail={data.getPostDetail}/>
      {/* 1記事 */}
     {post.map((item: any) => (
       <Link href={item.id} key={item.id}>

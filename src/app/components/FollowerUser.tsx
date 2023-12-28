@@ -11,18 +11,16 @@ import toast, { Toaster } from "react-hot-toast";
 export default function FollowUser(data: any) {
 
 const [follower, setFollower] = useState([null])
-const [userId, setUserId] = useState<string | undefined>(undefined);
 const [checkfollow, setCheckfollow] = useState<Array<{ userId: any, followId: any }>>([]);
+
+const userId = data.id
 
 //Pganegation
 const [page, setPage] = useState(1);
 const [pageCount, setPageCount] = useState(1);
 
 useEffect(() => {
-    const postIdUrl = location.pathname.slice(1);
-    const userId = postIdUrl.split("/").pop();
     getFollower(page, userId);
-    setUserId(userId)
 },[page])
 
 const getFollower = async(page: number, userId: any) => {
