@@ -40,7 +40,7 @@ export default function InputPost(data: any) {
     <Toaster />
       <div className=' rounded mt-3 bg-white flex justify-start items-center flex-col border-color'>
         <div className='flex w-[95%] mt-3'>
-          <Image alt="" src={sample} className='w-[55px]  h-[55px] rounded-full border-color'/>
+          <Image alt="" src={data.img || sample} width={55} height={55} className='w-[55px]  h-[55px] rounded-full border-color'/>
           <form onSubmit={handleInput} className='flex justify-center w-full items-center my-1 flex-col text-left'>
             <textarea name="content" placeholder='今日の出来事を投稿しよう' className='w-[95%] h-[45px] p-2 text-sm md:text-base rounded-md border-color flex items-start justify-start'>
             </textarea>

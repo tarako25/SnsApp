@@ -70,13 +70,13 @@ export default function ToPost(data: any) {
 
   return (
     <>
-    <InputPost userId={data.userId} userName={data.userName} To={postId} page={page} getToPost={getToPost} getPostDetail={data.getPostDetail}/>
+    <InputPost userId={data.userId} userName={data.userName} To={postId} page={page} getToPost={getToPost} getPostDetail={data.getPostDetail} img={data.img}/>
      {/* 1記事 */}
     {post.map((item: any) => (
       <Link href={item.id} key={item.id}>
       <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
         <div className='flex w-[95%] mt-3'>
-          <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
+          <Image src={item.user.image} width={55} height={55} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
           <div className='flex justify-center w-full items-center flex-col text-left'>
             <div className='flex justify-start items-center w-[95%]'>
               <div className='w-[95%] font-bold mb-1 text-md'>{item.username}</div>

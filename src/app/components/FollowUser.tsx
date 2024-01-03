@@ -7,24 +7,40 @@ import Link from 'next/link'
 import Image from 'next/image'
 import  LoadingPost  from "@/app/components/LoadingPost"
 import toast, { Toaster } from "react-hot-toast";
+import Page404 from "@/app/components/404"
 
 export default function FollowUser(data: any) {
 
 const [follow, setFollow] = useState([null])
 
 const userId = data.id
+const [checked, setChecked] = useState("");
 //Pganegation
 const [page, setPage] = useState(1);
 const [pageCount, setPageCount] = useState(1);
 
 useEffect(() => {
+    FetchId(data.id)
     getFollow(page, userId);
 },[page])
+
+if(checked === null){
+  return (
+    <Page404 />
+  )
+}
+
+const FetchId = async(id: any) => {
+  const response = await fetch(`/api/getId?Id=${id}`);
+  const data = await response.json();
+  setChecked(data.checkId)
+}
 
 const getFollow = async(page: number, userId: any) => {
     const response = await fetch(`/api/getFollow?page=${page}&userId=${userId}`);
     const User = await response.json();
     setFollow(User.follow)
+    console.log(User)
     const count = Math.ceil(User.count / pageItem);
     if(count < 0){
       setPageCount(count);
@@ -57,7 +73,7 @@ const getFollow = async(page: number, userId: any) => {
         <Link href={`/profile/${item.followId}`} key={item.id}>
         <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
           <div className='flex w-[95%] my-3'>
-            <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
+            <Image src={item.followuser.image} width={55} height={55} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
             <div className='flex justify-center w-full items-center flex-col text-left'>
               <div className='flex justify-start items-center w-[95%]'>
                 <div className='w-[95%] font-bold mb-1 text-md'>{item.followname}</div>

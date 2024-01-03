@@ -7,6 +7,10 @@ import ProfilePost from "@/app/components/ProfilePost"
 import CloseIcon from '@mui/icons-material/Close';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import Link from 'next/link';
+import Page404 from "@/app/components/404"
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import { v4 as uuidv4 } from "uuid";
+import { createClient } from '@supabase/supabase-js'
 
 type ProfileData = {
   name: string;
@@ -14,31 +18,59 @@ type ProfileData = {
   followCount: number;
   followerCount: number;
   introduction: string;
+  image: string
 }
+// Create Supabase client
+export const supabase = createClient(
+  "https://kgoobdypfoejirmggkmy.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtnb29iZHlwZm9lamlybWdna215Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTkxODc4OTksImV4cCI6MjAxNDc2Mzg5OX0.QYGMIlDcUWuHiIi5E2DjsA9OBnZIPYoMm3iwLnjpJKc"
+);
 
 export default function Profile(data: any) {
 
+  const userId = data.id;
   const [inputUser, setInputUser] = useState("")
   const [inputIntroduction, setInputIntroduction] = useState("")
   const [isEditModal, setIsEditModal] = useState(false);
   const [userName, setUserName] = useState<string | undefined>(undefined);
-  const userId = data.id;
   const [profileData, setProfileData] = useState<ProfileData | null>(null)
   const [checkfollow, setCheckfollow] = useState(null);
+  const [checked, setChecked] = useState("");
+  const [img, setImg] = useState("");
+
   useEffect(() => {
+    FetchId(data.id)
     document.getElementById("edit")
     if(data.userId){
       getProfileData(userId)
     }
   },[data])
-const getProfileData = async(userId:any) => {
-  const response = await fetch(`/api/getProfileData?userId=${userId}`)
-  const data = await response.json();
-  setProfileData(data.user)
-  setUserName(data.user.name)
-  setCheckfollow(data.follow)
-  setInputUser(data.user.name)
-  setInputIntroduction(data.user.inputIntroduction)
+  
+  if(checked === null){
+    return (
+      <Page404 />
+    )
+  }
+
+  const FetchId = async(id: any) => {
+    const response = await fetch(`/api/getId?Id=${id}`);
+    const data = await response.json();
+    setChecked(data.checkId)
+  }
+
+  const getProfileData = async(userId:any) => {
+    const response = await fetch(`/api/getProfileData?userId=${userId}`)
+    const data = await response.json();
+    if(data.user){
+      setProfileData(data.user)
+      setUserName(data.user.name)
+      setCheckfollow(data.follow)
+      setInputUser(data.user.name)
+      setInputIntroduction(data.user.inputIntroduction)
+      console.log(data.user)
+    } else {
+      return
+    }
 }
 if (profileData === null) {
   return <LoadingPost />; // ローディング画面を表示
@@ -104,10 +136,52 @@ const handleChangeIntroduction = (e: any) => {
     getProfileData(userId)
     toast.success("フォローを解除しました", { id: "1" });
   }
-
+  //モーダル動作
   const openEdit = () => {
     setIsEditModal(!isEditModal);
   }
+
+  //プロフィール画像編集
+  const handleImageChange = async (e: any) => {
+    console.log("IIEO");
+    if (!e.target.files || e.target.files.length == 0) {
+      // 画像が選択されていないのでreturn
+      return;
+    }
+    const file_name = uuidv4();
+    const file = e.target.files[0];
+    const { data, error } = await supabase.storage
+      .from("avatars")
+      .upload(file_name, file, {
+        cacheControl: "3600",
+        upsert: true,
+      });
+      console.log("成功7");
+    if (error) {
+      // Handle error
+      console.log(error);
+    } else {
+      const data = supabase.storage.from("avatars").getPublicUrl(file_name);
+      setImg(data.data.publicUrl);
+      fetchStorage(data.data.publicUrl);
+    }
+  };
+
+  //プロフィール画像URLをStorageに保存
+  const fetchStorage = async (url: string) => {
+    const data = {
+      url,
+      userId,
+    };
+    const response = await fetch("/api/getSbStorage", {
+      body: JSON.stringify(data),
+      method: "POST",
+    });
+    if (!response.ok) {
+      console.error("HTTPエラー:", response.statusText);
+    }
+  };
+
   return (
     <>
     <div className={isEditModal ? '' : 'hidden'} id="edit">
@@ -121,8 +195,12 @@ const handleChangeIntroduction = (e: any) => {
               <div className='font-bold text-xl text-gray-500'>
                 プロフィール編集
               </div>
-              <div className='w-[120px] h-[120px] border-color rounded-[80%] mt-5'>
-              </div>
+              <button className='w-[120px] h-[120px] border-color rounded-full mt-5 overflow-hidden relative flex justify-center items-center'>
+                <Image src={profileData.image} alt="" width={120} height={120} className='w-full h-full'/>
+                <AddAPhotoIcon className="text-white absolute z-20"/>
+                <input type="file" onChange={handleImageChange} className='w-full h-full absolute z-20 opacity-0 cursor-pointer'/>
+                <div className='w-full h-full absolute bg-black z-10 opacity-40'></div>
+              </button> 
               <form onSubmit={handleEdit} className='flex items-left justify-center flex-col w-[85%]'>
                 <label className="mt-1" htmlFor="username">ユーザー名</label>
                 <input placeholder="ユーザー名(10文字以内)" onChange={handleChangeUsername} value={inputUser} name="username" type="text" id="username" className='border-color w-full h-[40px] rounded px-2'></input>
@@ -140,7 +218,7 @@ const handleChangeIntroduction = (e: any) => {
     <Toaster />
         <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col w-full'>
             <div className='flex w-[95%] mt-3 flex-col'>
-              <Image src={sample} alt="" width={75} className='border-color w-[75px] h-[75px] rounded-full'/>
+              <Image src={profileData.image} alt="" width={75} height={75} className='border-color w-[75px] h-[75px] rounded-full'/>
               <div className='flex justify-between items-start mt-3'>
                 <div>
                   <div>

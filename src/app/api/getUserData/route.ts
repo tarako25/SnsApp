@@ -4,10 +4,10 @@ import prisma from "@/lib/Prisma"
 export async function GET(req: NextRequest, res: NextResponse) {
     try {
         const url = new URL(req.url);
-        const email = url.searchParams.get("email");
+        const Id = url.searchParams.get("Id");
         const user = await prisma.user.findFirst({
             where: {
-                email: email
+              id: String(Id)
             },
         })
   

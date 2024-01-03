@@ -12,6 +12,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
                 },
                 include: {
                     good: true,
+                    user: true,
                 },
             })
           return NextResponse.json(

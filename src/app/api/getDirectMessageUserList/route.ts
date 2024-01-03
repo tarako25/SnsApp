@@ -24,21 +24,16 @@ export async function GET(req: NextRequest, res: NextResponse) {
       },
       skip:pageStart,
       take: pageItem,
-      select: {
-        userId: true,
-        targetId: true,
-        createdAt: true,
-        content: true,
-        // ここにusernameとtargetnameを追加します
-        username: true,
-        targetname: true,
-      }
+      include: {
+          targetuser: true,
+        },
     });
 
     const user = messages.map(m => ({
       id: m.userId === userId ? m.targetId : m.userId,
       createdAt: m.createdAt,
       content: m.content,
+      targetuser: m.targetuser,
       // ここにusernameとtargetnameを追加します
       username: m.username,
       targetname: m.targetname

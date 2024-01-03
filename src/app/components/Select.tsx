@@ -24,7 +24,7 @@ export default function Select(data: any) {
               フォロワーの投稿
           </div>
       </div>
-      {switchbtn ? <AllPost userId={data.userId} userName={data.userName}/> : <FollowerPost userId={data.userId} userName={data.userName} />}
+      {switchbtn ? <AllPost userId={data.userId} userName={data.userName} img={data.img}/> : <FollowerPost userId={data.userId} userName={data.userName} img={data.img}/>}
     </div>
     </>
   )

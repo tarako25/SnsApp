@@ -37,6 +37,7 @@ export default function DirectMessage(userData: any) {
         async () => {
           const response = await fetch(`/api/getDirectMessage?targetId=${targetId}`);
           const message = await response.json();
+          console.log(message.data)
           return message;
         },
         { refreshInterval: 1000 }
@@ -114,7 +115,7 @@ export default function DirectMessage(userData: any) {
                       <div className="mr-4 h-14 w-14 overflow-hidden rounded-full border-color">
                         <Image
                           alt="アイコン"
-                          src={sample}
+                          src={item.user.image}
                           width={50}
                           height={50}
                           className="h-full w-full"
@@ -141,7 +142,7 @@ export default function DirectMessage(userData: any) {
                       <div className="ml-4 h-14 w-14 overflow-hidden rounded-full border-color">
                         <Image
                           alt="アイコン"
-                          src={sample}
+                          src={item.user.image}
                           width={50}
                           height={50}
                           className="h-full w-full"

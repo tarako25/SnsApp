@@ -17,6 +17,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
               not: String(userId)
           }
         },
+        include: {
+          user: true,
+        },
         orderBy: {
             id: "desc",
           },

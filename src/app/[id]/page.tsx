@@ -15,10 +15,10 @@ type User = {
 };
 
 const IndexPage = ({ params }: { params: { id: string } }) => {
-
   
   const [userId, setUserId] = useState<string | null | undefined>(null);
   const [userName, setUsername] = useState<string | null | undefined>(null);
+  const [img, setImg] = useState<string | null | undefined>(null);
 
   const { data: session, status } = useSession({
     required: true,
@@ -31,6 +31,7 @@ const IndexPage = ({ params }: { params: { id: string } }) => {
     const user: User | null | undefined = session ? session.user : null;
     setUserId(user ? user.id : null);
     setUsername(user ? user.name : null);
+    setImg(user ? user.image : null);
   }, [session]);
 
   return (
@@ -40,7 +41,11 @@ const IndexPage = ({ params }: { params: { id: string } }) => {
       <div className="w-[95%] flex justify-center items-center flex-col sm:w-[70%] md:w-[75%] xl:w-[1200px]">
         <div className="flex mt-0 flex-col items-center justify-between w-full md:flex-row md:items-start sm:mt-5">
           <MenuBar userId={userId} userName={userName}/>
-          <PostDetail userId={userId} userName={userName} id={params.id}/>
+          <div className="flex justify-center items-start flex-col w-[100%] rounded-md md:w-[70%] xl:w-[45%]">
+            <div className="w-full">
+              <PostDetail userId={userId} userName={userName} id={params.id} img={img}/>
+            </div>
+          </div>
           <SideBar userId={userId} userName={userName} />
         </div>
       </div>

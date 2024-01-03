@@ -58,6 +58,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
           in: [String(userId), String(targetId)],
         },
       },
+      include: {
+        user: true
+      }
     });
     return NextResponse.json({ data, message: "Success" }, { status: 201 });
   } catch (err) {

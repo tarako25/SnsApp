@@ -49,8 +49,10 @@ model User {
   sessions      Session[]
   post          Post[]
   good          Good[]
-  follow        Follow[]
-  directMessage DirectMessage[]
+  follows   Follow[] @relation("User")
+  followsUser Follow[] @relation("Followuser")
+  directMessage DirectMessage[]  @relation("User")
+  TargetMessage DirectMessage[]  @relation("TargetUser")
 }
 
 model VerificationToken {
@@ -91,7 +93,8 @@ model Follow {
   followId  String
   followname String
   createdAt DateTime
-  user    User    @relation(fields: [userId], references: [id])
+  user    User    @relation("User", fields: [userId], references: [id])
+  followuser    User    @relation("Followuser", fields: [followId], references: [id])
 }
 
 model DirectMessage {
@@ -102,7 +105,8 @@ model DirectMessage {
   targetname String
   content String
   createdAt DateTime
-  user    User    @relation(fields: [userId], references: [id])
+  user    User    @relation("User", fields: [userId], references: [id])
+  targetuser    User    @relation("TargetUser", fields: [targetId], references: [id])
 
   @@index([userId])
 }

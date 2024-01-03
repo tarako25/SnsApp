@@ -7,8 +7,9 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import Link from 'next/link';
 import ToPost from "@/app/components/ToPost"
-import LoadingPostDetail from "@/app/components/LoadingPostDetail"
+import LoadingPost from "@/app/components/LoadingPost"
 import ChatIcon from "@mui/icons-material/Chat";
+import Page404 from "@/app/components/404"
 
 interface PostType {
   id: string;
@@ -21,14 +22,31 @@ interface PostType {
   goodCount: number;
   postCount: number;
   good: []
+  user: {
+    image: string;
+  }
 }
 
 export default function PostDetail(data: any) {
   const [post, setPost] = useState<PostType | null>(null);
+  const [checked, setChecked] = useState("");
 
   useEffect(() => {
+    FetchId(data.id)
     getPostDetail(data.id)
   },[])
+
+  if(checked === null){
+    return (
+      <Page404 />
+    )
+  }
+
+  const FetchId = async(id: any) => {
+    const response = await fetch(`api/getPostId?Id=${id}`);
+    const data = await response.json();
+    setChecked(data.checkId)
+  }
 
   const getPostDetail = async(postId: any) => {
     const response = await fetch(`api/getPostDetail?postId=${postId}`);
@@ -39,7 +57,7 @@ export default function PostDetail(data: any) {
   if(post == null){
     return (
     <>
-    <LoadingPostDetail />
+    <LoadingPost />
     </>
     )
   }
@@ -79,55 +97,49 @@ export default function PostDetail(data: any) {
 
   return (
     <>
-    <div className='w-[100%] rounded-md md:w-[70%]'>
-      <div className='w-full pb-3 rounded-sm flex justify-center'>
-        <div className='w-[95%]'>
-          <Link href="/">
-            <div className='mt-3 text-black font-bold'>
-              <ArrowLeftIcon /> 投稿
-            </div>
-          </Link>
-          <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
-              {/* 記事詳細 */}
-              <Link href={`/profile/${post.userId}`} className='flex w-[95%] mt-3'>
-                    <Image src={sample} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
-                    <div className='flex justify-center w-full items-center flex-col text-left'>
-                        <div className='flex justify-start items-center w-[95%]'>
-                        <div className='w-[95%] font-bold mt-2 mb-5 text-[18px]'>{post?.username}</div>
-                        <div className='w-[95%] text-md flex justify-end'> {post?.createdAt && new Date(post?.createdAt).toLocaleString()}</div>
-                        </div>
-                        <div className='w-[95%] text-base'>
-                        {post?.content}
-                        </div>
-                        <div className='w-[95%] flex my-3'>
-                            <div className='mr-5'>
-                                {/*既にGoodが押されているかのチェック */}
-                                {post?.good.some(
-                                (goodItem: any) => goodItem.userId === data.userId
-                                ) ? (
-                                <button onClick={(e) => handleCancelGood(e, post.id)}>
-                                    <FavoriteIcon className='text-[20px]'/>
-                                    {post.goodCount}
-                                </button>
-                                ) : (
-                                <button onClick={(e) => handleGood(e, post?.id)}>
-                                    <FavoriteBorderIcon className='text-[20px]'/>
-                                    {post?.goodCount}
-                                </button>
-                                )}
-                              </div>
-                              <div className='mr-5'>
-                                <ChatIcon className='mr-1'/>
-                                {post?.postCount}
-                              </div>
-                            </div>
-                      </div>
-              </Link>
-          </div>
-          <ToPost userId={data.userId} userName={data.userName} getPostDetail={getPostDetail} id={data.id}/>
+      <Link href="/">
+        <div className='mt-3 text-black font-bold'>
+          <ArrowLeftIcon /> 投稿
         </div>
+      </Link>
+      <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
+          {/* 記事詳細 */}
+          <Link href={`/profile/${post.userId}`} className='flex w-[95%] mt-3'>
+                <Image src={post?.user.image} width={55} height={55} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
+                <div className='flex justify-center w-full items-center flex-col text-left'>
+                    <div className='flex justify-start items-center w-[95%]'>
+                    <div className='w-[95%] font-bold mt-2 mb-5 text-[18px]'>{post?.username}</div>
+                    <div className='w-[95%] text-md flex justify-end'> {post?.createdAt && new Date(post?.createdAt).toLocaleString()}</div>
+                    </div>
+                    <div className='w-[95%] text-base'>
+                    {post?.content}
+                    </div>
+                    <div className='w-[95%] flex my-3'>
+                        <div className='mr-5'>
+                            {/*既にGoodが押されているかのチェック */}
+                            {post?.good.some(
+                            (goodItem: any) => goodItem.userId === data.userId
+                            ) ? (
+                            <button onClick={(e) => handleCancelGood(e, post.id)}>
+                                <FavoriteIcon className='text-[20px]'/>
+                                {post.goodCount}
+                            </button>
+                            ) : (
+                            <button onClick={(e) => handleGood(e, post?.id)}>
+                                <FavoriteBorderIcon className='text-[20px]'/>
+                                {post?.goodCount}
+                            </button>
+                            )}
+                          </div>
+                          <div className='mr-5'>
+                            <ChatIcon className='mr-1'/>
+                            {post?.postCount}
+                          </div>
+                        </div>
+                  </div>
+          </Link>
       </div>
-    </div>
+      <ToPost userId={data.userId} userName={data.userName} getPostDetail={getPostDetail} id={data.id} img={data.img}/>
   </>
   )
 }

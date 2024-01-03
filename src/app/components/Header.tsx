@@ -1,11 +1,28 @@
 "use client"
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '@/imgs/logo.png'
 import sample from '@/imgs/sample2.png'
 import Link from 'next/link'
 
 export default function Header(data: any) {
+
+  const [userData, setUserData] = useState({
+    name: "",
+    image: sample
+  })
+
+  const getUserData = async(id: any) => {
+    const response = await fetch(`api/getUserData?Id=${id}`);
+    const Data = await response.json();
+    setUserData(Data.user)
+    console.log(Data.user)
+  }
+  useEffect(() => {
+    if(data.userId){
+      getUserData(data.userId)
+    }
+  },[data])
 
   return (
     <>
@@ -16,14 +33,14 @@ export default function Header(data: any) {
             <Link href="/">
               <Image src={Logo} className='w-[120px] h-[50px] md:w-[150px] md:h-[70px]' alt="Logo"/>
             </Link>
-              {data.userName ?
+              {userData ?
               <div className='flex justify-center items-center'>
-                <Image src={sample} alt="" className='w-[50px] h-[50px] rounded-full' />
-                <div className='ml-3 font-bold bg-color text-color py-1 px-2 rounded'><Link href={`/profile/${data.userId}`}>{data.userName}</Link></div>
+                <Image src={userData.image} width={50} height={50} alt="" className='w-[50px] h-[50px] rounded-full' />
+                <div className='ml-3 font-bold bg-color text-color py-1 px-2 rounded'><Link href={`/profile/${data.userId}`}>{userData.name}</Link></div>
               </div>
               :
               <div className='flex justify-center items-center'>
-                <Image src={sample} alt="" className='w-[50px] h-[50px] rounded-full' />
+                <Image src={sample} alt="" width={50} height={50} className='w-[50px] h-[50px] rounded-full' />
                 <div className='ml-3 font-bold w-[50px]'></div>
               </div>
               }
