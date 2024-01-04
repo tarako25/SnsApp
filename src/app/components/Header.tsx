@@ -8,8 +8,7 @@ import Link from 'next/link'
 export default function Header(data: any) {
 
   let user;
-  const [userData, setUserData] = useState(sessionStorage.getItem('user'))
-  console.log(userData)
+  const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('user') || '{}'));
   const getUserData = async(id: any) => {
     const cachedUser = sessionStorage.getItem('user');
     if (cachedUser) {

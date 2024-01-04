@@ -37,6 +37,7 @@ export default function Profile(data: any) {
   const [checkfollow, setCheckfollow] = useState(null);
   const [checked, setChecked] = useState("");
   const [img, setImg] = useState("");
+  const [imgurl, setImgurl] = useState("");
 
   useEffect(() => {
     FetchId(data.id)
@@ -67,6 +68,7 @@ export default function Profile(data: any) {
       setCheckfollow(data.follow)
       setInputUser(data.user.name)
       setInputIntroduction(data.user.inputIntroduction)
+      setImg(data.user.image)
       console.log(data.user)
     } else {
       return
@@ -95,6 +97,7 @@ const handleEdit = async(e: any) => {
     method: "POST",
   });
   if(response.ok){
+    InputSbStorage(imgurl)
     openEdit()
     getProfileData(userId)
     toast.success("プロフィールを保存しました", { id: "1" });
@@ -143,13 +146,24 @@ const handleChangeIntroduction = (e: any) => {
 
   //プロフィール画像編集
   const handleImageChange = async (e: any) => {
-    console.log("IIEO");
+
     if (!e.target.files || e.target.files.length == 0) {
       // 画像が選択されていないのでreturn
       return;
     }
-    const file_name = uuidv4();
     const file = e.target.files[0];
+    setImgurl(file)
+      var reader = new FileReader();
+        reader.onload = function(e) {
+          setImg(e.target?.result as string);
+          console.log("test", e.target?.result); // ここに移動
+        };
+        reader.readAsDataURL(file);
+  };
+
+  //プロフィール画像URLをSupaBaseに保存
+  const InputSbStorage = async(file: any) =>{
+    const file_name = uuidv4();
     const { data, error } = await supabase.storage
       .from("avatars")
       .upload(file_name, file, {
@@ -157,17 +171,17 @@ const handleChangeIntroduction = (e: any) => {
         upsert: true,
       });
       console.log("成功7");
-    if (error) {
-      // Handle error
-      console.log(error);
-    } else {
-      const data = supabase.storage.from("avatars").getPublicUrl(file_name);
-      setImg(data.data.publicUrl);
-      fetchStorage(data.data.publicUrl);
-    }
-  };
+      if (error) {
+        // Handle error
+        console.log(error);
+      } else {
+        const data = supabase.storage.from("avatars").getPublicUrl(file_name);
+        setImg(data.data.publicUrl);
+        fetchStorage(data.data.publicUrl);
+      }
+  }
 
-  //プロフィール画像URLをStorageに保存
+  //プロフィール画像URLをDBに保存
   const fetchStorage = async (url: string) => {
     const data = {
       url,
@@ -196,7 +210,7 @@ const handleChangeIntroduction = (e: any) => {
                 プロフィール編集
               </div>
               <button className='w-[120px] h-[120px] border-color rounded-full mt-5 overflow-hidden relative flex justify-center items-center'>
-                <Image src={profileData.image} alt="" width={120} height={120} className='w-full h-full'/>
+                <Image src={img} alt="" width={120} height={120} className='w-full h-full'/>
                 <AddAPhotoIcon className="text-white absolute z-20"/>
                 <input type="file" onChange={handleImageChange} className='w-full h-full absolute z-20 opacity-0 cursor-pointer'/>
                 <div className='w-full h-full absolute bg-black z-10 opacity-40'></div>
