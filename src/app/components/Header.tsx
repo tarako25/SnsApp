@@ -7,23 +7,27 @@ import Link from 'next/link'
 
 export default function Header(data: any) {
 
-  const [userData, setUserData] = useState({
-    name: "",
-    image: sample
-  })
-
+  let user;
+  const [userData, setUserData] = useState(sessionStorage.getItem('user'))
+  console.log(userData)
   const getUserData = async(id: any) => {
-    const response = await fetch(`api/getUserData?Id=${id}`);
-    const Data = await response.json();
-    setUserData(Data.user)
-    console.log(Data.user)
+    const cachedUser = sessionStorage.getItem('user');
+    if (cachedUser) {
+      user = JSON.parse(cachedUser);
+    } else {
+      const response = await fetch(`api/getUserData?Id=${id}`);
+      const Data = await response.json();
+      user = Data.user;
+      sessionStorage.setItem('user', JSON.stringify(user));
+    }
+    setUserData(user);
   }
+
   useEffect(() => {
     if(data.userId){
       getUserData(data.userId)
     }
-  },[data])
-
+  },[data.userName,data.img])
   return (
     <>
       <div className='p-3 w-full flex justify-center items-center bg-white'>

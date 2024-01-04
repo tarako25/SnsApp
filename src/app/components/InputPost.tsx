@@ -1,23 +1,40 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import sample from '@/imgs/sample2.png'
 import toast, { Toaster } from "react-hot-toast";
+import { z } from 'zod';
+
+
+const postDataSchema = z.object({
+  content: z.string().min(1, "投稿内容を入力してください").max(150, "内容は150文字以内で入力してください"),
+  userId: z.any(),
+  userName: z.any(),
+  To: z.any().optional(),
+});
 
 export default function InputPost(data: any) {
+
+  const [error, setError] = useState<string | null>(null);
+
   const handleInput = async(e: any) => {
     e.preventDefault()
     toast.loading("投稿中..", { id: "1" });
     const formData = new FormData(e.target);
     const content = formData.get("content");
-    if (content == "") {
-      return;
-    }
+
     const postData = {
       content, userId:data.userId, userName: data.userName, To: data.To
     }
-    const response = await fetch('api/inputPost', {
-      body: JSON.stringify(postData),
+    const result = postDataSchema.safeParse(postData);
+
+    if (!result.success) {
+      setError(result.error.errors[0].message);
+      return;
+    }
+    console.log(result.data)
+    const response = await fetch('/api/inputPost', {
+      body: JSON.stringify(result.data),
       headers: {
         "Content-type": "application/json",
       },
@@ -44,10 +61,19 @@ export default function InputPost(data: any) {
           <form onSubmit={handleInput} className='flex justify-center w-full items-center my-1 flex-col text-left'>
             <textarea name="content" placeholder='今日の出来事を投稿しよう' className='w-[95%] h-[45px] p-2 text-sm md:text-base rounded-md border-color flex items-start justify-start'>
             </textarea>
-            <div className='w-[95%] flex my-2 justify-end'>
+            <div className='w-[95%] felx justify-center items-center my-2'>
+              <div className='flex justify-start'>
+                {error ? 
+                <div>{error}</div>
+                :
+                ""
+                }
+              </div>
+              <div className='flex justify-end'>
                 <button className='border-color px-4 py-1 rounded' type='submit'>
                     送信
                 </button>
+              </div>
             </div>
           </form>
         </div>
