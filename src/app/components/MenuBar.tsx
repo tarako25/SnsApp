@@ -44,12 +44,12 @@ export default function MenuBar(data: any) {
         class:"default",
         id:"true"
     },
-    {
-        MenuName: "アカウント設定",
-        link: "/setting",
-        icon:<ManageAccountsIcon />,
-        class:"default",
-    },
+    // {
+    //     MenuName: "アカウント設定",
+    //     link: "/setting",
+    //     icon:<ManageAccountsIcon />,
+    //     class:"default",
+    // },
 ]
 
   return (
