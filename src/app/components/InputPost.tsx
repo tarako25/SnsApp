@@ -29,10 +29,10 @@ export default function InputPost(data: any) {
     const result = postDataSchema.safeParse(postData);
 
     if (!result.success) {
+      toast.error("投稿に失敗しました", { id: "1" });
       setError(result.error.errors[0].message);
       return;
     }
-    console.log(result.data)
     const response = await fetch('/api/inputPost', {
       body: JSON.stringify(result.data),
       headers: {
@@ -41,7 +41,7 @@ export default function InputPost(data: any) {
       method: "POST",
     });
     if (!response.ok) {
-      console.error("HTTPエラー:", response.statusText);
+      //log
     }
     e.target.reset();
     if(data.To == undefined){
@@ -50,6 +50,7 @@ export default function InputPost(data: any) {
       data.getPostDetail(data.To)
       data.getToPost(data.page, data.To)
     }
+    setError(null)
     toast.success("投稿しました", { id: "1" });
   } 
   return (
@@ -64,7 +65,7 @@ export default function InputPost(data: any) {
             <div className='w-[95%] felx justify-center items-center my-2'>
               <div className='flex justify-start'>
                 {error ? 
-                <div>{error}</div>
+                <div className='text-red-400'>{error}</div>
                 :
                 ""
                 }

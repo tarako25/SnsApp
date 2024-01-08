@@ -20,14 +20,14 @@ export async function GET(req: NextRequest, res: NextResponse) {
           ],
       },
       orderBy: {
-        id: "desc",
+        createdAt: "asc",
       },
-      skip:pageStart,
-      take: pageItem,
+
       include: {
           targetuser: true,
         },
     });
+
 
     const user = messages.map(m => ({
       id: m.userId === userId ? m.targetId : m.userId,
@@ -39,7 +39,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
       targetname: m.targetname
     }));
 
-    const uniqueUsers = Array.from(new Map(user.map(u => [u.id, u])).values());
+
+    const uniqueUsers = Array.from(new Map(user.map(u => [u.id, u])).values()).slice(pageStart, pageItem);
 
     const count = uniqueUsers.length
 

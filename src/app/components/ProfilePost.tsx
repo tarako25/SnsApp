@@ -47,7 +47,7 @@ export default function ProfilePost(data: any) {
       method: "POST",
     });
     if (!response.ok) {
-      console.error("HTTPエラー:", response.statusText);
+      //log
     }
     ProfilePost(page)
   }
@@ -64,7 +64,7 @@ export default function ProfilePost(data: any) {
       method: "PUT",
     });
     if (!response.ok) {
-      console.error("HTTPエラー:", response.statusText);
+      //log
     }
     ProfilePost(page)
   }
@@ -78,7 +78,7 @@ export default function ProfilePost(data: any) {
       <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
         <div className='flex w-[95%] mt-3'>
           <Image src={item.user.image} alt="" width={55} height={55} className='w-[55px] h-[55px] rounded-full border-color'/>
-          <div className='flex justify-center w-full items-center flex-col text-left'>
+          <div className='flex justify-center w-[90%] items-center flex-col text-left break-words'>
             <div className='flex justify-start items-center w-[95%]'>
               <div className='w-[95%] font-bold mb-1 text-md'>{item.username}</div>
               <div className='w-[95%] text-md flex justify-end'>{new Date(item.createdAt).toLocaleString()}</div>

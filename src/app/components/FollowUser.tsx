@@ -40,7 +40,6 @@ const getFollow = async(page: number, userId: any) => {
     const response = await fetch(`/api/getFollow?page=${page}&userId=${userId}`);
     const User = await response.json();
     setFollow(User.follow)
-    console.log(User)
     const count = Math.ceil(User.count / pageItem);
     if(count < 0){
       setPageCount(count);

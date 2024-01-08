@@ -37,7 +37,6 @@ export default function DirectMessage(userData: any) {
         async () => {
           const response = await fetch(`/api/getDirectMessage?targetId=${targetId}`);
           const message = await response.json();
-          console.log(message.data)
           return message;
         },
         { refreshInterval: 1000 }
@@ -75,8 +74,9 @@ export default function DirectMessage(userData: any) {
   const SendMessage = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    if(formData.get("message") == ""){
-        return
+    const message = formData.get("message");
+    if (typeof message === 'string' && (message === "" || message.length > 1000)) {
+      return;
     }
     const response = await fetch(`/api/getDirectMessage?targetId=${targetId}&targetName=${targetdata.name}`, {
       body: formData,
@@ -84,11 +84,10 @@ export default function DirectMessage(userData: any) {
     });
     e.target.reset();
     if (!response.ok) {
-      console.log("ロード中にエラーが発生しました");
+      //log
     }
     mutate(`/api/getDirectMessage?targetId=${targetId}`);
   };
-
   return (
     <>
     <div className="mb-5 border-color rounded">
@@ -111,20 +110,20 @@ export default function DirectMessage(userData: any) {
                 .reverse()
                 .map((item: any) =>
                   item.userId == userData.userId ? (
-                    <li key={item.id} className="mt-6 flex items-center">
-                      <div className="mr-4 h-14 w-14 overflow-hidden rounded-full border-color">
+                    <li key={item.id} className="mt-6 flex items-center w-full">
+                      <div className="mr-3 min-w-[50px] min-h-[50px] overflow-hidden rounded-full border-color">
                         <Image
                           alt="アイコン"
                           src={item.user.image}
                           width={50}
                           height={50}
-                          className="h-full w-full"
+                          className="min-w-[50px] min-h-[50px]"
                         />
                       </div>
-                      <div className="rounded-xl bg-green-300 px-3 py-1 text-xl mr-2">
+                      <div className="rounded-xl bg-green-300 px-3 py-1 text-base mr-2 max-w-[80%] break-words">
                         {item.content}
                       </div>
-                      <div className='text-xm'>
+                      <div className='text-sm'>
                         {new Date(item.createdAt).toLocaleString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
                       </div>
                     </li>
@@ -136,16 +135,16 @@ export default function DirectMessage(userData: any) {
                       <div className='text-xm'>
                         {new Date(item.createdAt).toLocaleString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
                       </div>
-                      <div className="rounded-xl bg-gray-300 px-3 py-1 text-xl ml-2">
+                      <div className="rounded-xl bg-gray-300 px-3 py-1 text-base ml-2 max-w-[80%] break-words">
                         {item.content}
                       </div>
-                      <div className="ml-4 h-14 w-14 overflow-hidden rounded-full border-color">
+                      <div className="ml-3 min-w-[50px] min-h-[50px] overflow-hidden rounded-full border-color">
                         <Image
                           alt="アイコン"
                           src={item.user.image}
                           width={50}
                           height={50}
-                          className="h-full w-full"
+                          className="min-w-[50px] min-h-[50px]"
                         />
                       </div>
                     </li>

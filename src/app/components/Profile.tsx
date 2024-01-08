@@ -11,6 +11,7 @@ import Page404 from "@/app/components/404"
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { v4 as uuidv4 } from "uuid";
 import { createClient } from '@supabase/supabase-js'
+import { z } from 'zod';
 
 type ProfileData = {
   name: string;
@@ -20,6 +21,12 @@ type ProfileData = {
   introduction: string;
   image: string
 }
+
+const postDataSchema = z.object({
+  username: z.string().min(1, "ユーザー名は1文字以上で入力してください").max(15, "ユーザー名は15文字以内で入力してください"),
+  introduction: z.string().max(150, "自己紹介は150文字以内で入力してください"),
+});
+
 // Create Supabase client
 export const supabase = createClient(
   "https://kgoobdypfoejirmggkmy.supabase.co",
@@ -37,7 +44,8 @@ export default function Profile(data: any) {
   const [checkfollow, setCheckfollow] = useState(null);
   const [checked, setChecked] = useState("");
   const [img, setImg] = useState("");
-  const [imgurl, setImgurl] = useState("");
+  const [imginfo, setImginfo] = useState("");
+  const [error, setError] = useState<any | null>([]);
 
   useEffect(() => {
     FetchId(data.id)
@@ -69,7 +77,6 @@ export default function Profile(data: any) {
       setInputUser(data.user.name)
       setInputIntroduction(data.user.inputIntroduction)
       setImg(data.user.image)
-      console.log(data.user)
     } else {
       return
     }
@@ -83,26 +90,32 @@ const handleEdit = async(e: any) => {
   const formData = new FormData(e.target);
   const username = formData.get("username");
   const introduction = formData.get("introduction");
-  if (username == "") {
-    return;
-  }
   const postData = {
     introduction, username, userId:data.userId
   }
-  const response = await fetch('/api/editProfile', {
-    body: JSON.stringify(postData),
-    headers: {
-      "Content-type": "application/json",
-    },
-    method: "POST",
-  });
-  if(response.ok){
-    InputSbStorage(imgurl)
-    openEdit()
-    getProfileData(userId)
-    toast.success("プロフィールを保存しました", { id: "1" });
-  } else{
-    toast.success("プロフィールの保存に失敗しました", { id: "1" });
+
+  const result = postDataSchema.safeParse(postData);
+
+  if (result.success) {
+    const response = await fetch('/api/editProfile', {
+      body: JSON.stringify(postData),
+      headers: {
+        "Content-type": "application/json",
+      },
+      method: "POST",
+    });
+    if(response.ok){
+      InputSbStorage(imginfo)
+      openEdit()
+      getProfileData(userId)
+      setError("")
+      toast.success("プロフィールを保存しました", { id: "1" });
+    } else{
+      toast.success("プロフィールの保存に失敗しました", { id: "1" });
+    }
+  } else {
+    setError(result.error);
+    return;
   }
 }
 //編集画面ユーザー入力
@@ -152,33 +165,34 @@ const handleChangeIntroduction = (e: any) => {
       return;
     }
     const file = e.target.files[0];
-    setImgurl(file)
+    setImginfo(file)
       var reader = new FileReader();
         reader.onload = function(e) {
           setImg(e.target?.result as string);
-          console.log("test", e.target?.result); // ここに移動
         };
         reader.readAsDataURL(file);
   };
 
   //プロフィール画像URLをSupaBaseに保存
   const InputSbStorage = async(file: any) =>{
-    const file_name = uuidv4();
+    if(file) {
+      const file_name = uuidv4();
     const { data, error } = await supabase.storage
       .from("avatars")
       .upload(file_name, file, {
         cacheControl: "3600",
         upsert: true,
       });
-      console.log("成功7");
       if (error) {
         // Handle error
-        console.log(error);
       } else {
         const data = supabase.storage.from("avatars").getPublicUrl(file_name);
         setImg(data.data.publicUrl);
         fetchStorage(data.data.publicUrl);
       }
+    } else {
+      return
+    }
   }
 
   //プロフィール画像URLをDBに保存
@@ -192,7 +206,7 @@ const handleChangeIntroduction = (e: any) => {
       method: "POST",
     });
     if (!response.ok) {
-      console.error("HTTPエラー:", response.statusText);
+      //log
     }
   };
 
@@ -220,6 +234,7 @@ const handleChangeIntroduction = (e: any) => {
                 <input placeholder="ユーザー名(10文字以内)" onChange={handleChangeUsername} value={inputUser} name="username" type="text" id="username" className='border-color w-full h-[40px] rounded px-2'></input>
                 <label className="mt-3" htmlFor="introduction">自己紹介</label>
                 <textarea placeholder="趣味や好きな事をかいて友達に知らせよう!" onChange={handleChangeIntroduction}  value={inputIntroduction} name="introduction" id="introduction" className='border-color w-full h-[100px] max-h-[150px] rounded px-2'></textarea>
+                {error.errors ? error.errors.map((error: any) => <div className='text-sm mt-2 text-red-400'>{error.message}</div>) : ""}
                 <div className='w-full justify-center items-center flex'>
                   <button type='submit' className='border-color w-[100px] h-[40px] mt-5 rounded'>保存</button>
                 </div>
@@ -282,7 +297,7 @@ const handleChangeIntroduction = (e: any) => {
                   <Link href={`/follow/${profileData.id}`}>フォロワー {profileData?.followerCount}</Link>
                 </div>
               </div>
-              <div className='my-3'>
+              <div className='my-3 break-words'>
               {profileData?.introduction}
               </div>
             </div>

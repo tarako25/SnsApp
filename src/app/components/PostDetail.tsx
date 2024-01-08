@@ -73,7 +73,7 @@ export default function PostDetail(data: any) {
       method: "POST",
     });
     if (!response.ok) {
-      console.error("HTTPエラー:", response.statusText);
+      //log
     }
     getPostDetail(postId)
   }
@@ -90,7 +90,7 @@ export default function PostDetail(data: any) {
       method: "PUT",
     });
     if (!response.ok) {
-      console.error("HTTPエラー:", response.statusText);
+      //log
     }
     getPostDetail(postId)
   }
@@ -106,12 +106,12 @@ export default function PostDetail(data: any) {
           {/* 記事詳細 */}
           <Link href={`/profile/${post.userId}`} className='flex w-[95%] mt-3'>
                 <Image src={post?.user.image} width={55} height={55} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
-                <div className='flex justify-center w-full items-center flex-col text-left'>
+                <div className='flex justify-center w-[90%] items-center flex-col text-left break-words'>
                     <div className='flex justify-start items-center w-[95%]'>
                     <div className='w-[95%] font-bold mt-2 mb-5 text-[18px]'>{post?.username}</div>
                     <div className='w-[95%] text-md flex justify-end'> {post?.createdAt && new Date(post?.createdAt).toLocaleString()}</div>
                     </div>
-                    <div className='w-[95%] text-base'>
+                    <div className='w-[95%] text-base break-words'>
                     {post?.content}
                     </div>
                     <div className='w-[95%] flex my-3'>
