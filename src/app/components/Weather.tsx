@@ -2,6 +2,7 @@ import React from 'react'
 import CloudIcon from '@mui/icons-material/Cloud';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
+import Link from 'next/link';
 
 export default function Weather() {
   return (
@@ -10,11 +11,31 @@ export default function Weather() {
         <h2 className='mt-3 mb-2 text-lg'>
             本日の天気
         </h2>
+        {/* 設定で県名が登録されていない場合は設定するを表示 */}
         <div className='flex mb-2 w-full items-center'>
-            <div className='text-lg font-bold mr-10'>東京</div>
-            <div><CloudIcon className='text-gray-200 w-[40px] h-[40px]'/></div>
+            <div className='text-lg font-bold'>東京</div>
+            <div className='mx-5 flex items-center'>
+                {/* 最高気温 */}
+                <div className='text-xl font-bold text-red-400'>29°</div>
+                <div className='mx-1'>/</div>
+                {/* 最低気温 */}
+                <div className='text-xl font-bold text-blue-400'>29°</div>
+            </div>
+            <div className='flex flex-col justify-center items-center'>
+                <CloudIcon className='text-gray-200 w-[35px] h-[35px]'/>
+                <div>30%</div>
+            </div>
             <div className='mx-4'><TrendingFlatIcon className='text-gray-500'/></div>
-            <div><WbSunnyIcon className='text-red-300 w-[40px] h-[40px]'/></div>
+            <div className='flex flex-col justify-center items-center'>
+                <WbSunnyIcon className='text-red-300 w-[35px] h-[35px]'/>
+                <div>50%</div>
+            </div>
+        </div>
+        <div className='flex my-3 border-b-2 pb-1'>
+            <Link href="" className='font-bold'>設定</Link>
+            <div>
+                から都道府県を選択すると表示されます
+            </div>
         </div>
     </div>
     </>
