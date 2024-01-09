@@ -24,6 +24,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
       },
 
       include: {
+          user: true,
           targetuser: true,
         },
     });
@@ -33,15 +34,15 @@ export async function GET(req: NextRequest, res: NextResponse) {
       id: m.userId === userId ? m.targetId : m.userId,
       createdAt: m.createdAt,
       content: m.content,
+      user: m.user,
       targetuser: m.targetuser,
-      // ここにusernameとtargetnameを追加します
       username: m.username,
       targetname: m.targetname
     }));
 
 
     const uniqueUsers = Array.from(new Map(user.map(u => [u.id, u])).values()).slice(pageStart, pageItem);
-
+    console.log(uniqueUsers)
     const count = uniqueUsers.length
 
     return NextResponse.json(
