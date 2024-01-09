@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSession, signOut, signIn } from "next-auth/react"
 import SearchIcon from '@mui/icons-material/Search';
+import Trend  from "@/app/components/Trend"
+import Weather  from "@/app/components/Weather"
 
 export default function SideBar(data: any) {
   return (
@@ -12,9 +14,8 @@ export default function SideBar(data: any) {
             <input type="text" className='border-color w-full rounded-2xl h-[35px] px-10' placeholder='ユーザーを検索'/>
           </div>
           <button onClick={() => signOut()} className='bg-white mt-3 font-bold w-full h-[40px] border-2'>ログアウト(仮)</button>
-          <p>ユーザー検索</p>
-          <p>トレンド</p>
-          <p>天気予報(設定で県検索している場合)</p>
+          <Trend />
+          <Weather />
           </div>
     </div>
     </>
