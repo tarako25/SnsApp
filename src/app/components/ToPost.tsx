@@ -23,7 +23,7 @@ export default function ToPost(data: any) {
   },[page])
 
   const getToPost = async(page: number, postId: any) => {
-    const response = await fetch(`api/getToPost?page=${page}&postId=${postId}`);
+    const response = await fetch(`/api/getToPost?page=${page}&postId=${postId}`);
     const Post = await response.json();
     setPost(Post.data)
     const count = Math.ceil(Post.count / pageItem);
@@ -41,7 +41,7 @@ export default function ToPost(data: any) {
       postId,
       userId:data.userId,
     };
-    const response = await fetch("api/InputGood",{
+    const response = await fetch("/api/InputGood",{
       body: JSON.stringify(PostData),
       method: "POST",
     });
@@ -58,7 +58,7 @@ export default function ToPost(data: any) {
       postId,
       userId:data.userId,
     };
-    const response = await fetch("api/InputGood",{
+    const response = await fetch("/api/InputGood",{
       body: JSON.stringify(PostData),
       method: "PUT",
     });

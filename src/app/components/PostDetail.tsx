@@ -43,13 +43,13 @@ export default function PostDetail(data: any) {
   }
 
   const FetchId = async(id: any) => {
-    const response = await fetch(`api/getPostId?Id=${id}`);
+    const response = await fetch(`/api/getPostId?Id=${id}`);
     const data = await response.json();
     setChecked(data.checkId)
   }
 
   const getPostDetail = async(postId: any) => {
-    const response = await fetch(`api/getPostDetail?postId=${postId}`);
+    const response = await fetch(`/api/getPostDetail?postId=${postId}`);
     const Post = await response.json();
     setPost(Post.data)
   }
@@ -68,7 +68,7 @@ export default function PostDetail(data: any) {
       postId,
       userId:data.userId,
     };
-    const response = await fetch("api/InputGood",{
+    const response = await fetch("/api/InputGood",{
       body: JSON.stringify(PostData),
       method: "POST",
     });
@@ -85,7 +85,7 @@ export default function PostDetail(data: any) {
       postId,
       userId:data.userId,
     };
-    const response = await fetch("api/InputGood",{
+    const response = await fetch("/api/InputGood",{
       body: JSON.stringify(PostData),
       method: "PUT",
     });

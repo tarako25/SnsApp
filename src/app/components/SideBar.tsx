@@ -12,7 +12,6 @@ export default function SideBar(data: any) {
     const formData = new FormData(e.currentTarget);
     const content = formData.get("content");
     router.push(`/search?content=${content}`);
-
   }
   return (
     <>

@@ -25,7 +25,7 @@ export default function AllPost(data: any) {
   },[page])
 
   const getFollowPost = async(page: number) => {
-    const response = await fetch(`api/getFollowPost?page=${page}`);
+    const response = await fetch(`/api/getFollowPost?page=${page}`);
     const Post = await response.json();
     setPost(Post.data)
     const count = Math.ceil(Post.count / pageItem);
@@ -45,7 +45,7 @@ export default function AllPost(data: any) {
       postId,
       userId:data.userId,
     };
-    const response = await fetch("api/InputGood",{
+    const response = await fetch("/api/InputGood",{
       body: JSON.stringify(PostData),
       method: "POST",
     });
@@ -62,7 +62,7 @@ export default function AllPost(data: any) {
       postId,
       userId:data.userId,
     };
-    const response = await fetch("api/InputGood",{
+    const response = await fetch("/api/InputGood",{
       body: JSON.stringify(PostData),
       method: "PUT",
     });
