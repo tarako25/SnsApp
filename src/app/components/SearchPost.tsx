@@ -127,7 +127,7 @@ export default function SearchPost(data: any) {
     :
     (data.keyword ? 
       <div className='flex justify-center items-center mt-3'>
-      <div><span className='font-bold'>{data.content}</span>に関する投稿がありません</div>
+      <div><span className='font-bold'>{data.keyword}</span>に関する投稿がありません</div>
     </div>
     :
     ""

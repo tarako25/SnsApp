@@ -109,7 +109,7 @@ const getSearchUser = async(page: number) => {
     ))
   :
   <div className='flex justify-center items-center mt-3'>
-    <div>""に関するユーザーが見つかりません</div>
+    <div><span className='font-bold'>{data.keyword}</span>に関するユーザーが見つかりません</div>
   </div>
   }
   <div className='w-full mt-3 flex justify-center'>
