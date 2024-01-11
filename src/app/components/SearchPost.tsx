@@ -4,7 +4,6 @@ import Image from 'next/image'
 import React from 'react'
 import sample from '@/imgs/sample2.png'
 import { useEffect, useState } from "react"
-import InputPost from "@/app/components/InputPost"
 import Pagination from "@mui/material/Pagination";
 import { pageItem } from "@/lib/PageItem"
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -44,10 +43,12 @@ export default function SearchPost(data: any) {
     }
   }
 
-  if (post[0] === null) {
-    return <LoadingPost />; // ローディング画面を表示
+  if (post[0] === null ) {
+    if(data.keyword != ""){
+      return <LoadingPost />; // ローディング画面を表示
+    }
   }
-  
+
   //Good押したときの処理
   const handleGood = async(e: any, postId: any) => {
     e.preventDefault();

@@ -19,7 +19,7 @@ export default function SideBar(data: any) {
         <div className='flex items-center flex-col w-full'>
           <form onSubmit={TransitionPage} className={`relative mb-3 flex justify-start items-center w-full ${data.filter}`}>
             <SearchIcon className="absolute mx-3 text-gray-400" />
-            <input type="text" className='border-color w-full rounded-2xl h-[35px] px-10' name="keyword" placeholder='ユーザーを検索'/>
+            <input type="text" className='border-color w-full rounded-2xl h-[35px] px-10' name="keyword" placeholder='投稿やユーザーを検索'/>
           </form>
           <Trend />
           <Weather />

@@ -87,7 +87,7 @@ const getFollower = async(page: number, userId: any) => {
     {
     follower.length != 0 ?
     follower.map((item: any) => (
-        <Link href={`/profile/${item.userId}`} key={item.id}>
+      <Link href={`/profile/${item.userId}`} key={item.id}>
         <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
           <div className='flex w-[95%] my-3'>
             <Image src={item.user.image} width={55} height={55} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>

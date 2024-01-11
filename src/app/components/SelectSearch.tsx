@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import SearchPost from "@/app/components/SearchPost"
+import SearchUser from "@/app/components/SearchUser"
 import FollowerPost from "@/app/components/FollowerPost"
 import SearchIcon from '@mui/icons-material/Search';
 import { useRouter } from "next/navigation";
@@ -19,7 +20,6 @@ export default function SelectSearch(data: any) {
 
 
   useEffect(() => {
-    console.log(search)
     setKeyword(search);
   }, [search]);
 
@@ -43,7 +43,7 @@ export default function SelectSearch(data: any) {
         <div  className="relative mb-3 flex justify-start items-center w-full">
         <form onSubmit={TransitionPage} className="relative mb-3 flex justify-start items-center w-full">
             <SearchIcon className="absolute mx-3 text-gray-400" />
-            <input type="text" name="keyword" className='border-color w-full rounded-3xl h-[45px] px-10' placeholder='ユーザーを検索' value={`${inputkeyword}`} onChange={(e) => {
+            <input type="text" name="keyword" className='border-color w-full rounded-3xl h-[45px] px-10' placeholder={switchbtn ? "記事を検索" : "ユーザーを検索"} value={`${inputkeyword}`} onChange={(e) => {
               setInputkeyword(e.target.value)
             }} />
           </form>
@@ -57,7 +57,7 @@ export default function SelectSearch(data: any) {
               ユーザー
           </div>
       </div>
-      {switchbtn ? <SearchPost userId={data.userId} userName={data.userName} keyword={keyword}/> : <FollowerPost userId={data.userId} userName={data.userName} img={data.img}/>}
+      {switchbtn ? <SearchPost userId={data.userId} userName={data.userName} keyword={keyword}/> : <SearchUser userId={data.userId} userName={data.userName} keyword={keyword}/>}
     </div>
     </>
   )
