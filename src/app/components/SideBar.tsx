@@ -11,7 +11,9 @@ export default function SideBar(data: any) {
     e.preventDefault()
     const formData = new FormData(e.currentTarget);
     const keyword = formData.get("keyword");
-    router.push(`/search?keyword=${keyword}`);
+    if (typeof keyword === 'string') {
+      router.push(`/search?keyword=${encodeURIComponent(keyword)}`);
+    } 
   }
   return (
     <>
