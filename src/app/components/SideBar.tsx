@@ -10,8 +10,8 @@ export default function SideBar(data: any) {
   const TransitionPage = (e: any) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget);
-    const content = formData.get("content");
-    router.push(`/search?content=${content}`);
+    const keyword = formData.get("keyword");
+    router.push(`/search?keyword=${keyword}`);
   }
   return (
     <>
@@ -19,7 +19,7 @@ export default function SideBar(data: any) {
         <div className='flex items-center flex-col w-full'>
           <form onSubmit={TransitionPage} className={`relative mb-3 flex justify-start items-center w-full ${data.filter}`}>
             <SearchIcon className="absolute mx-3 text-gray-400" />
-            <input type="text" className='border-color w-full rounded-2xl h-[35px] px-10' name="content" placeholder='ユーザーを検索'/>
+            <input type="text" className='border-color w-full rounded-2xl h-[35px] px-10' name="keyword" placeholder='ユーザーを検索'/>
           </form>
           <Trend />
           <Weather />

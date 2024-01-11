@@ -4,19 +4,24 @@ import SearchPost from "@/app/components/SearchPost"
 import FollowerPost from "@/app/components/FollowerPost"
 import SearchIcon from '@mui/icons-material/Search';
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function SelectSearch(data: any) {
 
-  const [switchbtn, setSwitchbtn] = useState(true);
-  const [content, setContent] = useState<string | null>()
-
   const router = useRouter();
+  const sParams = useSearchParams();
+
+  const search = sParams.get("keyword");
+
+  const [switchbtn, setSwitchbtn] = useState(true);
+  const [keyword, setKeyword] = useState<string | null>(search)
+  const [inputkeyword, setInputkeyword] = useState<string | null>(search)
+
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const content = urlParams.get('content');
-    setContent(content);
-  },[])
+    console.log(search)
+    setKeyword(search);
+  }, [search]);
 
   const handleAll = () => {
     setSwitchbtn(true)
@@ -27,7 +32,9 @@ export default function SelectSearch(data: any) {
 
   const TransitionPage = (e: any) => {
     e.preventDefault()
-    router.push(`/search?content=${content}`);
+    const formData = new FormData(e.currentTarget);
+    const keyword = formData.get("keyword");
+    router.push(`/search?keyword=${keyword}`);
   }
 
   return (
@@ -36,8 +43,8 @@ export default function SelectSearch(data: any) {
         <div  className="relative mb-3 flex justify-start items-center w-full">
         <form onSubmit={TransitionPage} className="relative mb-3 flex justify-start items-center w-full">
             <SearchIcon className="absolute mx-3 text-gray-400" />
-            <input type="text" className='border-color w-full rounded-3xl h-[45px] px-10' placeholder='ユーザーを検索' value={`${content}`} onChange={(e) => {
-              setContent(e.target.value)
+            <input type="text" name="keyword" className='border-color w-full rounded-3xl h-[45px] px-10' placeholder='ユーザーを検索' value={`${inputkeyword}`} onChange={(e) => {
+              setInputkeyword(e.target.value)
             }} />
           </form>
         </div>
@@ -50,7 +57,7 @@ export default function SelectSearch(data: any) {
               ユーザー
           </div>
       </div>
-      {switchbtn ? <SearchPost userId={data.userId} userName={data.userName} content={content}/> : <FollowerPost userId={data.userId} userName={data.userName} img={data.img}/>}
+      {switchbtn ? <SearchPost userId={data.userId} userName={data.userName} keyword={keyword}/> : <FollowerPost userId={data.userId} userName={data.userName} img={data.img}/>}
     </div>
     </>
   )

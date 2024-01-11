@@ -21,14 +21,14 @@ export default function SearchPost(data: any) {
   const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
-    if(data.content){
+    if(data.keyword){
         getSearchPost(page)
     }
-  },[page,data.content])
+  },[page,data.keyword])
 
   const getSearchPost = async(page: number) => {
     const response = await fetch(`/api/getSearchPost?page=${page}`, {
-        body: JSON.stringify(data.content),
+        body: JSON.stringify(data.keyword),
         headers: {
           "Content-type": "application/json",
         },
@@ -47,6 +47,7 @@ export default function SearchPost(data: any) {
   if (post[0] === null) {
     return <LoadingPost />; // ローディング画面を表示
   }
+  
   //Good押したときの処理
   const handleGood = async(e: any, postId: any) => {
     e.preventDefault();
@@ -81,7 +82,7 @@ export default function SearchPost(data: any) {
   return (
     <>
     {/* 1記事 */}
-    {post.length != 0 ?
+    {post.length != 0 && data.keyword != "" ?
     post.map((item: any) => (
       <Link href={item.id} key={item.id}>
       <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
@@ -123,9 +124,13 @@ export default function SearchPost(data: any) {
     </Link>
     ))
     :
-    <div className='flex justify-center items-center mt-3'>
+    (data.keyword ? 
+      <div className='flex justify-center items-center mt-3'>
       <div><span className='font-bold'>{data.content}</span>に関する投稿がありません</div>
     </div>
+    :
+    ""
+    )
     }
     <div className='w-full mt-3 flex justify-center'>
     <Pagination
