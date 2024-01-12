@@ -71,6 +71,16 @@ export default function AllPost(data: any) {
     }
     getAllPost(page)
   }
+
+  //ハッシュタグParse
+  function parseHashtags(text: any) {
+    return text.match(/#\S+|\S+|　| /g).map((word: any, index: number) => {
+      if (word.startsWith('#')) {
+        return <Link key={index} href={`/search?keyword=${word}`} className="text-blue-400">{word}</Link>;
+      }
+      return word;
+    });
+  }
   return (
     <>
     <InputPost userId={data.userId} userName={data.userName} page={page} getPost={getAllPost} img={data.img}/>
@@ -87,7 +97,7 @@ export default function AllPost(data: any) {
               <div className='w-[95%] text-sm flex justify-end'>{new Date(item.createdAt).toLocaleString()}</div>
             </div>
             <div className='w-[95%] text-sm md:text-base'>
-            {item.content}
+            {parseHashtags(item.content)}
             </div>
             <div className='w-[95%] flex my-2'>
               <div className='mr-5'>

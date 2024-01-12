@@ -42,7 +42,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 
     const uniqueUsers = Array.from(new Map(user.map(u => [u.id, u])).values()).slice(pageStart, pageItem);
-    console.log(uniqueUsers)
     const count = uniqueUsers.length
 
     return NextResponse.json(

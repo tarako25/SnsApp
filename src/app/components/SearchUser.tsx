@@ -51,7 +51,6 @@ const getSearchUser = async(page: number) => {
     const postData = {
       userId: data.userId, userName: data.userName, followId: followId, followName: followName
     }
-    console.log(postData)
     await fetch('/api/InputFollow', {
       body: JSON.stringify(postData),
       headers: {
