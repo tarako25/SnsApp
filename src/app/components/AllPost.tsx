@@ -74,7 +74,7 @@ export default function AllPost(data: any) {
 
   //ハッシュタグParse
   function parseHashtags(text: any) {
-    return text.match(/#\S+|\S+|　| /g).map((word: any, index: number) => {
+    return text.match(/#\S+|\S+|　| |\s/g).map((word: any, index: number) => {
       if (word.startsWith('#')) {
         return <Link key={index} href={`/search?keyword=${word}`} className="text-blue-400">{word}</Link>;
       }
