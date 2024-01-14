@@ -36,7 +36,7 @@ export default function SearchPost(data: any) {
     const Post = await response.json();
     setPost(Post.searchPost)
     const count = Math.ceil(Post.count / pageItem);
-    if(count < 0){
+    if(count > 0){
       setPageCount(count);
     } else {
       setPageCount(1)

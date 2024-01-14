@@ -26,7 +26,7 @@ export default function ProfilePost(data: any) {
     const Post = await response.json();
     setPost(Post.data)
     const count = Math.ceil(Post.count / pageItem);
-    if(count < 0){
+    if(count > 0){
       setPageCount(count);
     } else {
       setPageCount(1)

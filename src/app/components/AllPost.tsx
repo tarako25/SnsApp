@@ -11,6 +11,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import  LoadingPost  from "@/app/components/LoadingPost"
 import ChatIcon from "@mui/icons-material/Chat";
+import ph  from "@/app/components/ParseHashtags"
+
 
 export default function AllPost(data: any) {
 
@@ -29,7 +31,8 @@ export default function AllPost(data: any) {
     const Post = await response.json();
     setPost(Post.data)
     const count = Math.ceil(Post.count / pageItem);
-    if(count < 0){
+    console.log(count)
+    if(count > 0){
       setPageCount(count);
     } else {
       setPageCount(1)
@@ -72,15 +75,6 @@ export default function AllPost(data: any) {
     getAllPost(page)
   }
 
-  //ハッシュタグParse
-  function parseHashtags(text: any) {
-    return text.match(/#\S+|\S+|　| |\s/g).map((word: any, index: number) => {
-      if (word.startsWith('#')) {
-        return <Link key={index} href={`/search?keyword=${word}`} className="text-blue-400">{word}</Link>;
-      }
-      return word;
-    });
-  }
   return (
     <>
     <InputPost userId={data.userId} userName={data.userName} page={page} getPost={getAllPost} img={data.img}/>
@@ -97,7 +91,7 @@ export default function AllPost(data: any) {
               <div className='w-[95%] text-sm flex justify-end'>{new Date(item.createdAt).toLocaleString()}</div>
             </div>
             <div className='w-[95%] text-sm md:text-base'>
-            {parseHashtags(item.content)}
+            {ph(item.content)}
             </div>
             <div className='w-[95%] flex my-2'>
               <div className='mr-5'>

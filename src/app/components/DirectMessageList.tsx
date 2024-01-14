@@ -21,7 +21,7 @@ const getDirectMessageUserList = async(page: number) => {
     const response = await fetch(`/api/getDirectMessageUserList?page=${page}`);
     const data = await response.json();
     const count = Math.ceil(data.count / pageItem);
-    if(count < 0){
+    if(count > 0){
       setPageCount(count);
     } else {
       setPageCount(1)
