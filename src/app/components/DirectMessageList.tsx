@@ -45,8 +45,8 @@ if (user[0] === null) {
               <div className='flex items-left w-[95%] flex-col'>
                 <div className='font-bold mb-1 text-md'>{item.username}</div>
                 <div className='flex'>
-                  <div>メッセージ：</div>
-                  <div className="text-gray-400 text-sm">{item.content}</div>
+                  <div className='text-sm min-w-[65px]'>メッセージ：</div>
+                  <div className="text-gray-400 text-sm break-all">{item.content}</div>
                 </div>
               </div>
             </div>
@@ -62,8 +62,8 @@ if (user[0] === null) {
               <div className='flex items-left w-[95%] flex-col'>
                 <div className='font-bold mb-1 text-md'>{item.targetname}</div>
                 <div className='flex'>
-                  <div className='text-sm'>メッセージ：</div>
-                  <div className="text-gray-400 text-sm">{item.content}</div>
+                  <div className='text-sm min-w-[65px]'>メッセージ：</div>
+                  <div className="text-gray-400 text-sm break-all">{item.content}</div>
                 </div>
               </div>
             </div>

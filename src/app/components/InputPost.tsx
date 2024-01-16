@@ -17,16 +17,16 @@ export default function InputPost(data: any) {
 
   const [error, setError] = useState<string | null>(null);
   const [parseContent, setParseContent] = useState<string[] | null>([]);
-  const [content, setContent] = useState<string | null>(null);
 
   const handleChangeText = (e: any) => {
     const text = pt((e.target as HTMLElement).textContent);
     setParseContent(text);
-    setContent((e.target as HTMLElement).textContent)
   }
 
   const handleInput = async(e: any) => {
     e.preventDefault()
+    const contentEditableElement = e.target.querySelector('[contenteditable]');
+    const content = contentEditableElement.innerText
     toast.loading("投稿中..", { id: "1" });
     const postData = {
       content, userId:data.userId, userName: data.userName, To: data.To
@@ -54,8 +54,8 @@ export default function InputPost(data: any) {
       data.getPostDetail(data.To)
       data.getToPost(data.page, data.To)
     }
+    contentEditableElement.innerText = ""
     setParseContent(null)
-    setContent(null)
     setError(null)
     toast.success("投稿しました", { id: "1" });
   } 
