@@ -63,7 +63,7 @@ if (user[0] === null) {
                 <div className='font-bold mb-1 text-md'>{item.targetname}</div>
                 <div className='flex'>
                   <div className='text-sm min-w-[65px]'>メッセージ：</div>
-                  <div className="text-gray-400 text-sm break-all">{item.content}</div>
+                  <div className="text-gray-400 text-sm max-w-[75%] whitespace-nowrap overflow-hidden text-ellipsis">{item.content}</div>
                 </div>
               </div>
             </div>

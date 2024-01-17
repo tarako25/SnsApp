@@ -10,6 +10,7 @@ import ToPost from "@/app/components/ToPost"
 import LoadingPost from "@/app/components/LoadingPost"
 import ChatIcon from "@mui/icons-material/Chat";
 import Page404 from "@/app/components/404"
+import ph  from "@/app/components/ParseHashtags"
 
 interface PostType {
   id: string;
@@ -112,7 +113,7 @@ export default function PostDetail(data: any) {
                     <div className='w-[95%] text-md flex justify-end'> {post?.createdAt && new Date(post?.createdAt).toLocaleString()}</div>
                     </div>
                     <div className='w-[95%] text-base break-words'>
-                    {post?.content}
+                    {ph(post?.content)}
                     </div>
                     <div className='w-[95%] flex my-3'>
                         <div className='mr-5'>

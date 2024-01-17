@@ -7,6 +7,11 @@
   color: gray;
 }
 
+.placeholder-profile:empty::before {
+  content: "趣味や好きな事をかいて友達に知らせよう";
+  color: gray;
+}
+
 .border-color {
   border: 1px solid #d4d4d8
 }
@@ -29,6 +34,14 @@
 .text-color:hover {
   color: white;
 }
+
+.txt-limit {
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @keyframes spin {
   100% {
     transform: rotate(360deg);

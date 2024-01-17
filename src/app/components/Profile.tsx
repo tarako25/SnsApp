@@ -12,6 +12,7 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { v4 as uuidv4 } from "uuid";
 import { createClient } from '@supabase/supabase-js'
 import { z } from 'zod';
+import ph  from "@/app/components/ParseHashtags"
 
 type ProfileData = {
   name: string;
@@ -75,7 +76,7 @@ export default function Profile(data: any) {
       setUserName(data.user.name)
       setCheckfollow(data.follow)
       setInputUser(data.user.name)
-      setInputIntroduction(data.user.inputIntroduction)
+      setInputIntroduction(data.user.introduction)
       setImg(data.user.image)
     } else {
       return
@@ -89,7 +90,8 @@ const handleEdit = async(e: any) => {
   e.preventDefault()
   const formData = new FormData(e.target);
   const username = formData.get("username");
-  const introduction = formData.get("introduction");
+  const contentEditableElement = e.target.querySelector('[contenteditable]');
+    const introduction = contentEditableElement.innerText
   const postData = {
     introduction, username, userId:data.userId
   }
@@ -123,11 +125,7 @@ const handleChangeUsername = (e: any) => {
   const username = e.target.value
   setInputUser(username)
 }
-//編集画面紹介入力
-const handleChangeIntroduction = (e: any) => {
-  const introduction = e.target.value
-  setInputIntroduction(introduction)
-}
+
 //フォロー
   const handleFollow = async(followName: any, followId: any) => {
     const postData = {
@@ -214,7 +212,7 @@ const handleChangeIntroduction = (e: any) => {
     <>
     <div className={isEditModal ? '' : 'hidden'} id="edit">
       <div className=' bg-black w-screen h-screen fixed top-0 left-0 bg-opacity-50 z-10 flex justify-center items-center flex-col'>
-        <div className="bg-white w-[450px] h-[550px] rounded">
+        <div className="bg-white w-[450px] min-h-[550px] rounded">
           <div className='flex items-center flex-col justify-center h-full'>
             <div className='w-[85%] flex items-center flex-col py-7'>
               <div className='flex justify-end w-full px-2'>
@@ -231,9 +229,11 @@ const handleChangeIntroduction = (e: any) => {
               </button> 
               <form onSubmit={handleEdit} className='flex items-left justify-center flex-col w-[85%]'>
                 <label className="mt-1" htmlFor="username">ユーザー名</label>
-                <input placeholder="ユーザー名(10文字以内)" onChange={handleChangeUsername} value={inputUser} name="username" type="text" id="username" className='border-color w-full h-[40px] rounded px-2'></input>
+                <input placeholder="ユーザー名(15文字以内)" onChange={handleChangeUsername} value={inputUser} name="username" type="text" id="username" className='border-color w-full h-[40px] rounded px-2'></input>
                 <label className="mt-3" htmlFor="introduction">自己紹介</label>
-                <textarea placeholder="趣味や好きな事をかいて友達に知らせよう!" onChange={handleChangeIntroduction}  value={inputIntroduction} name="introduction" id="introduction" className='border-color w-full h-[100px] max-h-[150px] rounded px-2'></textarea>
+                <div contentEditable  className='placeholder-profile break-all border-color w-full min-h-[100px] max-h-[400px] overflow-hidden rounded px-2'>
+                  {inputIntroduction}
+                </div>
                 {error.errors ? error.errors.map((error: any) => <div className='text-sm mt-2 text-red-400'>{error.message}</div>) : ""}
                 <div className='w-full justify-center items-center flex'>
                   <button type='submit' className='border-color w-[100px] h-[40px] mt-5 rounded'>保存</button>
@@ -298,7 +298,7 @@ const handleChangeIntroduction = (e: any) => {
                 </div>
               </div>
               <div className='my-3 break-words'>
-              {profileData?.introduction}
+              {ph(profileData?.introduction)}
               </div>
             </div>
           </div>

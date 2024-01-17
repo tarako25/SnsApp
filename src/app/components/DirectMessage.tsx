@@ -73,16 +73,16 @@ export default function DirectMessage(userData: any) {
   //メッセージを送信
   const SendMessage = async (e: any) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const message = formData.get("message");
+    const contentEditableElement = e.target.querySelector('[contenteditable]');
+    const message = contentEditableElement.innerText
     if (typeof message === 'string' && (message === "" || message.length > 1000)) {
       return;
     }
     const response = await fetch(`/api/getDirectMessage?targetId=${targetId}&targetName=${targetdata.name}`, {
-      body: formData,
+      body: JSON.stringify(message),
       method: "POST",
     });
-    e.target.reset();
+    contentEditableElement.innerText = ""
     if (!response.ok) {
       //log
     }
@@ -153,14 +153,10 @@ export default function DirectMessage(userData: any) {
             </ul>
           </div>
         </div>
-        <form onSubmit={SendMessage} className="flex justify-between p-3 bg-color-none rounded-b">
-          <input
-            name="message"
-            type="text"
-            className="h-10 w-4/5 rounded pl-3 border-color"
-            placeholder='メッセージを送信'
-          />
-          <button className="w-1/6 rounded border-color bg-color text-color font-bold">送信</button>
+        <form onSubmit={SendMessage} className="flex justify-between  items-end p-3 bg-color-none rounded-b">
+            <div contentEditable  className='break-all bg-white placeholder w-4/5 min-h-[45px] p-2 text-sm md:text-base rounded-md border-color flex items-start justify-start'>
+            </div>
+          <button className="w-1/6 h-[45px] rounded border-color bg-color text-color font-bold">送信</button>
         </form>
       </div>
     </>

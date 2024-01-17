@@ -9,6 +9,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import  LoadingPost  from "@/app/components/LoadingPost"
 import ChatIcon from "@mui/icons-material/Chat";
+import ph  from "@/app/components/ParseHashtags"
 
 export default function ProfilePost(data: any) {
     const [post, setPost] = useState([null])
@@ -84,7 +85,7 @@ export default function ProfilePost(data: any) {
               <div className='w-[95%] text-md flex justify-end'>{new Date(item.createdAt).toLocaleString()}</div>
             </div>
             <div className='w-[95%] text-sm md:text-base'>
-            {item.content}
+            {ph(item.content)}
             </div>
             <div className='w-[95%] flex my-2'>
               <div className='mr-5'>

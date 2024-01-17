@@ -9,6 +9,7 @@ import sample from '@/imgs/sample2.png'
 import Link from 'next/link'
 import Image from 'next/image'
 import ChatIcon from "@mui/icons-material/Chat";
+import ph  from "@/app/components/ParseHashtags"
 
 export default function ToPost(data: any) {
 
@@ -84,7 +85,7 @@ export default function ToPost(data: any) {
               <div className='w-[95%] text-md flex justify-end'>{new Date(item.createdAt).toLocaleString()}</div>
             </div>
             <div className='w-[95%] text-sm md:text-base'>
-            {item.content}
+            {ph(item.content)}
             </div>
             <div className='w-[95%] flex my-2'>
               <div className='mr-5'>

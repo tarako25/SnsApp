@@ -20,6 +20,7 @@ export default function SelectSearch(data: any) {
 
 
   useEffect(() => {
+    console.log(search)
     setKeyword(search);
   }, [search]);
 

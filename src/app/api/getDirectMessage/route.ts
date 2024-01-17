@@ -12,8 +12,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const url = new URL(req.url);
     const targetId = url.searchParams.get("targetId");
     const targetName = url.searchParams.get("targetName");
-    const formData = await req.formData();
-    const message = formData.get("message");
+    const message = await req.json();
     //日付作成
     const now = new Date();
     //ISO形式に変換
