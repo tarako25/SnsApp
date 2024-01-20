@@ -13,15 +13,16 @@ export default function SelectSearch(data: any) {
   const sParams = useSearchParams();
 
   const search = sParams.get("keyword");
-
+  console.log("test")
   const [switchbtn, setSwitchbtn] = useState(true);
   const [keyword, setKeyword] = useState<string | null>(search)
   const [inputkeyword, setInputkeyword] = useState<string | null>(search)
 
 
   useEffect(() => {
-    console.log(search)
+    console.log("test2")
     setKeyword(search);
+    setInputkeyword(search)
   }, [search]);
 
   const handleAll = () => {
@@ -60,7 +61,7 @@ export default function SelectSearch(data: any) {
               ユーザー
           </div>
       </div>
-      {switchbtn ? <SearchPost userId={data.userId} userName={data.userName} keyword={keyword}/> : <SearchUser userId={data.userId} userName={data.userName} keyword={keyword}/>}
+      {switchbtn ? <SearchPost userId={data.userId} userName={data.userName} keyword={search}/> : <SearchUser userId={data.userId} userName={data.userName} keyword={search}/>}
     </div>
     </>
   )

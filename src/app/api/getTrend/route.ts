@@ -3,8 +3,14 @@ import prisma from "@/lib/Prisma";
 
 export async function GET(req: NextRequest, res: NextResponse) {
     try {
-        const trends = await prisma.post.findMany({
+        const todayStart = new Date();
+        todayStart.setUTCHours(15, 0, 0, 0); // UTCで15時に設定
+
+        const posts = await prisma.post.findMany({
             where: {
+                createdAt: {
+                    gte: todayStart,
+                },
                 OR: [
                     { content: { contains: "#" } },
                     { content: { contains: "＃" } }
@@ -13,12 +19,10 @@ export async function GET(req: NextRequest, res: NextResponse) {
             select: { content: true }
         });
 
-        console.log("test0", trends)
         // ハッシュタグを抽出してカウントする
-        const hashtagCounts: Record<string, number> = trends.reduce((acc, post) => {
+        const hashtagCounts: Record<string, number> = posts.reduce((acc, post) => {
             // 正規表現を使用してハッシュタグを抽出（'#' と '＃' の両方に対応）
-            const hashtags = post.content.match(/[#＃][\wぁ-んァ-ン一-龠]+/g) || [];
-            console.log("test1", hashtags)
+            const hashtags = post.content.match(/[#＃][\wぁ-んァ-ン一-龠０-９]+/g) || [];
             hashtags.forEach(tag => {
                 // ハッシュタグを正規化（小文字に変換し、全角の '#' を半角に変換）
                 const normalizedTag = tag.toLowerCase().replace(/＃/, '#');
@@ -27,13 +31,14 @@ export async function GET(req: NextRequest, res: NextResponse) {
             return acc;
         }, {} as Record<string, number>);
 
-        // 最も多いハッシュタグを見つける
-        const mostCommonHashtag = Object.keys(hashtagCounts).reduce((a, b) => hashtagCounts[a] > hashtagCounts[b] ? a : b);
-
-        console.log("test2",mostCommonHashtag)
-
+        // ハッシュタグを多い順にソートして上位10個を取得し、それぞれのカウントと共に
+        const Trends = Object.entries(hashtagCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10)
+        .map(entry => ({ tag: entry[0], count: entry[1] }));     
+            
         return NextResponse.json(
-            { mostCommonHashtag, message: "Success" },
+            { Trends, message: "Success" },
             { status: 200 },
         );
     } catch (err) {

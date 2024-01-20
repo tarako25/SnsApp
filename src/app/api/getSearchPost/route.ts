@@ -6,14 +6,20 @@ export async function POST(req: NextRequest, res: NextResponse) {
     try {
         const url = new URL(req.url);
         const page = url.searchParams.get("page");
-        const keyword = await req.json();
         const pageStart = (Number(page) - 1) * pageItem;
+        const keyword = await req.json();
+        const alternatePrefix = keyword[0] === '#' ? '＃' : '#';
+        const keyword2 = alternatePrefix + keyword.slice(1);
         
         const searchPost = await prisma.post.findMany({
             where: {
                 content: {
-                    contains: keyword
-                }
+                    contains: keyword[0] === '#' || keyword[0] === '＃' ? keyword.slice(1) : keyword,
+                },
+                OR: [
+                    { content: { contains: keyword } },
+                    { content: { contains: keyword2 } },
+                ],
             },
             include: {
                 good: true,
@@ -22,9 +28,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
             orderBy: {
                 id: "desc",
             },
-            skip:pageStart,
+            skip: pageStart,
             take: pageItem,
-        })
+        });
         const count = await prisma.post.count({
             where: {
                 content: {
