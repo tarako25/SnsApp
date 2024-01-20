@@ -13,9 +13,9 @@ export default function page() {
         <div className='pt-[0px] sm:py-[50px] flex justify-start items-center flex-col bg-white w-full h-full rounded-xl'>
           <Image src={Logo} alt="" className='w-[175px] h-[60px] sm:w-[215px] sm:h-[75px]'/>
           {/* <div className='flex justify-center items-start flex-col'>
-            <label htmlFor="" className='font-bold text-black mb-1 text-sm'>メールアドレス</label>
+            <label htmlFor="" className='font-bold text-black mb-1'>メールアドレス</label>
             <input type="text" placeholder="email" className='pl-2 rounded mb-3 w-[350px] h-[40px] border-2'/>
-            <label htmlFor="" className='font-bold text-black mb-1 text-sm'>パスワード</label>
+            <label htmlFor="" className='font-bold text-black mb-1'>パスワード</label>
             <input type="text" placeholder="password" className='pl-2 rounded mb-4 w-[350px] h-[40px] border-2'/>
             <button className='w-[350px] h-[40px] rounded bg-zinc-700 text-white'>
               ログイン

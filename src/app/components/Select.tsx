@@ -17,10 +17,10 @@ export default function Select(data: any) {
     <div className='w-[100%] rounded-md md:w-[70%] xl:w-[45%]'>
       {/* 投稿切り替えボタン */}
       <div className='w-full rounded flex justify-around h-[50px] '>
-          <div onClick={handleAll} className='w-[50%] text-sm md:text-base flex justify-center items-center border rounded cursor-pointer font-bold text-md bg-color text-color border-color'>
+          <div onClick={handleAll} className='w-[50%] flex justify-center items-center border rounded cursor-pointer font-bold bg-color text-color border-color'>
               すべての投稿
           </div>
-          <div onClick={handleFollow} className='w-[50%] text-sm md:text-base flex justify-center items-center border rounded cursor-pointer font-bold text-md bg-color text-color border-color'>
+          <div onClick={handleFollow} className='w-[50%] flex justify-center items-center border rounded cursor-pointer font-bold bg-color text-color border-color'>
               フォロワーの投稿
           </div>
       </div>

@@ -23,12 +23,12 @@ export default function Weather() {
             </div>
             <div className='flex flex-col justify-center items-center'>
                 <CloudIcon className='text-gray-200 w-[35px] h-[35px]'/>
-                <div className='text-sm'>30%</div>
+                <div>30%</div>
             </div>
             <div className='mx-5 text-xl text-gray-400'>ー</div>
             <div className='flex flex-col justify-center items-center'>
                 <WbSunnyIcon className='text-red-400 w-[35px] h-[35px]'/>
-                <div className='text-sm'>50%</div>
+                <div>50%</div>
             </div>
         </div>
         {/* <div className='flex my-3 border-b-2 pb-1'>

@@ -234,7 +234,7 @@ const handleChangeUsername = (e: any) => {
                 <div contentEditable  className='placeholder-profile break-all border-color w-full min-h-[100px] max-h-[400px] overflow-hidden rounded px-2'>
                   {inputIntroduction}
                 </div>
-                {error.errors ? error.errors.map((error: any) => <div className='text-sm mt-2 text-red-400'>{error.message}</div>) : ""}
+                {error.errors ? error.errors.map((error: any) => <div className='mt-2 text-red-400'>{error.message}</div>) : ""}
                 <div className='w-full justify-center items-center flex'>
                   <button type='submit' className='border-color w-[100px] h-[40px] mt-5 rounded'>保存</button>
                 </div>
@@ -257,7 +257,7 @@ const handleChangeUsername = (e: any) => {
                     @{profileData.id}
                   </div>
                 </div>
-                <div className='flex flex-col text-sm'>
+                <div className='flex flex-col'>
                   {/* ログイン中のidとurlのidが等しいとき */}
                   {data.userId === userId ? 
                     <button onClick={openEdit} className='border-color bg-color text-color p-2 rounded'>

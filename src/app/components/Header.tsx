@@ -18,7 +18,7 @@ export default function Header(data: any) {
               {data.img || data.userName ?
               <div className='flex justify-center items-center'>
                 <Image src={data.img} width={50} height={50} alt="" className='w-[50px] h-[50px] rounded-full' />
-                <div className='ml-3 font-bold bg-color text-color py-1 px-2 rounded'><Link href={`/profile/${data.userId}`}>{data.userName}</Link></div>
+                <div className='ml-3 font-bold bg-color text-color py-1 px-1 rounded'><Link href={`/profile/${data.userId}`}>{data.userName}</Link></div>
               </div>
               :
               <div className='flex justify-center items-center'>

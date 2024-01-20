@@ -15,10 +15,10 @@ export default function SelectFollow(data: any) {
   return (
     <>
     <div className='w-full mt-3 rounded flex justify-around h-[50px]'>
-        <div onClick={handleAll} className='w-[50%] text-sm md:text-base flex justify-center items-center rounded cursor-pointer font-bold text-md border-color bg-color text-color'>
+        <div onClick={handleAll} className='w-[50%] flex justify-center items-center rounded cursor-pointer font-bold border-color bg-color text-color'>
             フォロー
         </div>
-        <div onClick={handleFollow} className='w-[50%] text-sm md:text-base flex justify-center items-center rounded cursor-pointer font-bold text-md border-color bg-color text-color'>
+        <div onClick={handleFollow} className='w-[50%] flex justify-center items-center rounded cursor-pointer font-bold border-color bg-color text-color'>
             フォロワー
         </div>
     </div>

@@ -81,7 +81,7 @@ const getSearchUser = async(page: number) => {
       <Link href={`/profile/${item.id}`} key={item.id}>
         <div className='border-color rounded mt-3 bg-white flex justify-start items-center flex-col'>
           <div className='flex w-[95%] my-3'>
-            <Image src={item.image} width={55} height={55} alt="" className='w-[55px] h-[55px] rounded-full border-color'/>
+            <Image src={item.image} width={50} height={50} alt="" className='w-[50px] h-[50px] rounded-full border-color'/>
             <div className='flex justify-center w-full items-center flex-col text-left'>
               <div className='flex justify-start items-center w-[95%]'>
                 <div className='w-[95%] font-bold mb-1 text-md'>{item.name}</div>

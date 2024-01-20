@@ -60,7 +60,7 @@ export default function MenuBar(data: any) {
             {MenuElements.map((items, index) =>
               <Link href={items.link} key={index} className={`px-2 cursor-pointer flex justify-center items-center h-[45px] rounded-md text-color border-color bg-color  md:h-[55px] md:mb-3 w-[20%] md:w-[100%] md:flex ${items.class === 'none' ? 'hidden' : ''}`}>
                 <div className='mr-2'>{items.icon}</div>
-                <div className='w-full text-left font-bold text-sm tracking-[3px] hidden md:block'>{items.MenuName}</div>
+                <div className='w-full text-left font-bold tracking-[3px] hidden md:block'>{items.MenuName}</div>
               </Link>
             )}
           </div>

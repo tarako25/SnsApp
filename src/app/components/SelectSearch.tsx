@@ -54,10 +54,10 @@ export default function SelectSearch(data: any) {
         </div>
       {/* 投稿切り替えボタン */}
       <div className='w-full rounded flex justify-around h-[50px] '>
-          <div onClick={handleAll} className='w-[50%] text-sm md:text-base flex justify-center items-center border rounded cursor-pointer font-bold text-md bg-color text-color border-color'>
+          <div onClick={handleAll} className='w-[50%] flex justify-center items-center border rounded cursor-pointer font-bold bg-color text-color border-color'>
               投稿
           </div>
-          <div onClick={handleFollow} className='w-[50%] text-sm md:text-base flex justify-center items-center border rounded cursor-pointer font-bold text-md bg-color text-color border-color'>
+          <div onClick={handleFollow} className='w-[50%] flex justify-center items-center border rounded cursor-pointer font-bold bg-color text-color border-color'>
               ユーザー
           </div>
       </div>

@@ -64,10 +64,10 @@ export default function InputPost(data: any) {
     <Toaster />
       <div className=' rounded mt-3 bg-white flex justify-start items-center flex-col border-color'>
         <div className='flex w-[95%] mt-3'>
-          <Image alt="" src={data.img || sample} width={55} height={55} className='w-[55px]  h-[55px] rounded-full border-color'/>
+          <Image alt="" src={data.img || sample} width={50} height={50} className='w-[50px]  h-[50px] rounded-full border-color'/>
           <form onSubmit={handleInput} className='flex justify-center w-full items-center flex-col '>
             <div className='flex justify-center w-full items-center flex-col text-left mt-1'>
-              <div contentEditable onInput={handleChangeText} className='break-all placeholder w-[95%] min-h-[45px] p-2 text-sm md:text-base rounded-md border-color flex items-start justify-start'>
+              <div contentEditable onInput={handleChangeText} className='break-all placeholder w-[95%] min-h-[45px] p-2 rounded-md border-color flex items-center justify-start'>
               </div>
               <div className='flex justify-start items-center w-[95%] mt-3 flex-wrap break-all'>
               {parseContent && parseContent.map((item: any) => (
@@ -75,7 +75,7 @@ export default function InputPost(data: any) {
               ))}
               </div>
             </div>
-            <div className='w-[95%] felx justify-center items-center m-2'>
+            <div className='w-[95%] felx justify-center items-center mb-3 '>
               <div className='flex justify-start'>
                 {error ? 
                 <div className='text-red-400'>{error}</div>

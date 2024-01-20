@@ -123,7 +123,7 @@ export default function DirectMessage(userData: any) {
                       <div className="rounded-xl bg-green-300 px-3 py-1 text-base mr-2 max-w-[80%] break-words">
                         {item.content}
                       </div>
-                      <div className='text-sm'>
+                      <div>
                         {new Date(item.createdAt).toLocaleString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
                       </div>
                     </li>
@@ -154,7 +154,7 @@ export default function DirectMessage(userData: any) {
           </div>
         </div>
         <form onSubmit={SendMessage} className="flex justify-between  items-end p-3 bg-color-none rounded-b">
-            <div contentEditable  className='break-all bg-white placeholder w-4/5 min-h-[45px] p-2 text-sm md:text-base rounded-md border-color flex items-start justify-start'>
+            <div contentEditable  className='break-all bg-white placeholder w-4/5 min-h-[45px] p-2 rounded-md border-color flex items-start justify-start'>
             </div>
           <button className="w-1/6 h-[45px] rounded border-color bg-color text-color font-bold">送信</button>
         </form>
