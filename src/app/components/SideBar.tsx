@@ -24,8 +24,9 @@ export default function SideBar(data: any) {
             <input type="text" className='border-color w-full rounded-2xl h-[35px] px-10' name="keyword" placeholder='投稿やユーザーを検索'/>
           </form>
           <Trend />
-          <Weather />
-          <button onClick={() => signOut()} className='bg-white my-3 font-bold w-full h-[40px] border-2'>ログアウト(仮)</button>
+          {/* 実装未定
+          <Weather /> */}
+          <button onClick={() => signOut()} className='bg-white rounded-md font-bold w-full h-[45px] border-2'>ログアウト</button>
           </div>
     </div>
     </>

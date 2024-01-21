@@ -11,7 +11,6 @@ export default function Trend() {
         const response = await fetch(`/api/getTrend`);
         const data = await response.json();
         setTrend(data.Trends)
-        console.log(data.Trends)
       }
   return (
     <>

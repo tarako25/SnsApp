@@ -8,16 +8,16 @@ export default function Header(data: any) {
 
   return (
     <>
-      <div className='p-3 w-full flex justify-center items-center bg-white'>
+      <div className='px-3 py-2 w-full flex justify-center items-center bg-white'>
       <div className="w-[95%] flex justify-center items-center flex-col sm:w-[70%] md:w-[75%] xl:w-[1200px]">
         <div className='flex justify-center items-center w-full'>
           <div className='w-full flex justify-between items-center'>
             <Link href="/">
-              <Image src={Logo} className='w-[120px] h-[50px] md:w-[150px] md:h-[70px]' alt="Logo"/>
+              <Image src={Logo} className='w-[105px] h-[50px] md:w-[120px] md:h-[60px]' alt="Logo"/>
             </Link>
               {data.img || data.userName ?
               <div className='flex justify-center items-center'>
-                <Image src={data.img} width={50} height={50} alt="" className='w-[50px] h-[50px] rounded-full' />
+                <Image src={data.img} width={45} height={45} alt="" className='w-[45px] h-[45px] rounded-full' />
                 <div className='ml-3 font-bold bg-color text-color py-1 px-1 rounded'><Link href={`/profile/${data.userId}`}>{data.userName}</Link></div>
               </div>
               :
