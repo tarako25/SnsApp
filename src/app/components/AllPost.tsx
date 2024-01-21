@@ -31,7 +31,6 @@ export default function AllPost(data: any) {
     const Post = await response.json();
     setPost(Post.data)
     const count = Math.ceil(Post.count / pageItem);
-    console.log(count)
     if(count > 0){
       setPageCount(count);
     } else {
