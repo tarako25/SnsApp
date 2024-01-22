@@ -4,7 +4,7 @@ import prisma from "@/lib/Prisma";
 export async function GET(req: NextRequest, res: NextResponse) {
     try {
         const todayStart = new Date();
-        todayStart.setHours(9, 0, 0, 0); // UTCで15時に設定
+        todayStart.setHours(todayStart.getHours() - 15);
 
         const posts = await prisma.post.findMany({
             where: {
